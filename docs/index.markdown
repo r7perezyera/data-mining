@@ -4,3 +4,7 @@
 
 layout: home
 ---
+Hola
+# Presentaciones
+
+[Association rules](association-rules.html)
