@@ -1,0 +1,12 @@
+---
+layout: post
+title: From rmd to Jelyll, v2
+date:   2021-05-08 13:55 -0500
+categories: association-rules
+
+---
+<html>
+    <body>
+        <h1>Data Mining with MD?</h1>
+    </body>
+</html>
