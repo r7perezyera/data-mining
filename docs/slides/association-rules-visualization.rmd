@@ -1,5 +1,5 @@
 ---
-title: "arulesViz"
+title: "Visualization of Association Rules"
 author: "Marciano Moreno"
 date: "8 de mayo de 2021"
 output: ioslides_presentation
@@ -9,29 +9,58 @@ output: ioslides_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## Introducción
+La minería de reglas de asociación frecuentemente resulta en la identificación de un gran número de reglas.
+¿Cómo descubrir las reglas de interés?
+Diversas técnicas de visualización pueden contibuir a mejorar la productividad en el análisis de un dataset de reglas de asociación.
 
+## Métricas de interés
+- Support: proporción de transacciones que contienen el itemset.
+- Confidence:  probabilidad de encontrar el RHS (Y) de la regla en transacciones bajo la condición que éstas también incluyan LHS (X).
+- Lift: Desviación del soporte de toda la regla del soporte esperado bajo independencia de ambos lados de la regla
 
-## R Markdown
+## Proceso de generación de reglas de asociación
 
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+1: Generar el conjunto de todos los itemsets frecuentes del dataset (valor mínimo de support).
+2: Generar todas las posibles reglas de cada itemset frecuente eliminando aquellas que no cumplan con valor mínimo de confidence.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+## El reto 
+En el peor de los casos se generan 2^n - n -1 itemsets frecuentes con más de dos items a partir de una base de datos de n items distintos.
 
-## Slide with Bullets
+Dado que cada itemset frecuente tendrá en el peor de los casos al menos dos reglas, elconjunto de reglas estará en orden de O(2^n).
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+- Al incrementar el valor (mímimo) de support es posible mantener el número de reglas de asociación encontradas en un tamaño manejable.
 
-## Slide with R Output
+  - Aceptando el riesgo de eliminar reglas potencialmente interesantes con menos support.
+  
+## Visualización al rescate
 
-```{r cars, echo = TRUE}
-summary(cars)
+- Fase exploratoria: : encontrar características interesantes e importantes de los datos:
+  - Altamente iterativa empleando filtros, distintas escalas (zoom) y reacomodo de datos.
+  
+- Fase explicativa: compartir la información con audiencias más amplias, destacar hallazgos.
+
+## Técnicas de visualización para reglas de asociación
+
+- Scatter plots.
+- Visualización de matrices.
+- Grafos.
+- Mosaicos.
+- Gráficas de coordenadas paralelas.
+- Visualización de matrices agrupadas (técnica específica para AR).
+
+Uso de colores, gradientes y reordenamiento para mejorar la capacidad de interpretación.
+
+## Paquete arulesViz
+Paquete del lenguaje R para visualizar reglas de asociación e itemsets frecuentes.
+```{r}
+#install.packages("arulesViz")
 ```
 
-## Slide with Plot
 
-```{r pressure}
-plot(pressure)
+
+## Ejemplo de visualización de AR
+```{r}
+library("arulesViz")
 ```
 
