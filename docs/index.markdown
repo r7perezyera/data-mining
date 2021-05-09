@@ -7,4 +7,7 @@ layout: home
 Hola
 # Presentaciones
 
-[Association rules](association-rules.html)
+[Association rules](slides/association-rules.html)
+
+[Association rules visualization](slides/association-rules-visualization.html)
+
