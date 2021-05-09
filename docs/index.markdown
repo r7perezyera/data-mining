@@ -11,3 +11,6 @@ Hola
 
 [Association rules visualization](slides/association-rules-visualization.html)
 
+# Notebooks
+[Association rulese visualization](notebooks/association-rules-visualization.hmtl)
+
