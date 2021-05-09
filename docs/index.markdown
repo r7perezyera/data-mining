@@ -12,5 +12,5 @@ Hola
 [Association rules visualization](slides/association-rules-visualization.html)
 
 # Notebooks
-[Association rules visualization](notebooks/association-rules-visualization.nb.html)
+[Association rules visualization](notebooks/rstudio/association-rules-visualization.nb.html)
 
