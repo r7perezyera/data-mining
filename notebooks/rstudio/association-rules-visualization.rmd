@@ -1,12 +1,16 @@
 ---
 title: "Association Rules Visualization - Exercices"
-output: html_notebook
+params:
+  output_dir: ../../docs/notebooks/rstudio
+output:
+  html_document:
+    df_print: paged
 ---
 ## Instalación y configuración de arulesViz
 Instalar el paquete arulesViz
 
 ```{r}
-install.packages("arulesViz")
+#install.packages("arulesViz")
 ```
 
 Cargar la librería arulesViz (carga automáticamente arules)
@@ -31,16 +35,40 @@ Responde a las siguientes preguntas de acuerdo a la información del paso anteri
 Efectuaremos minería de reglas de asociación por medio del algoritmo Apriori implementado en arules.
 ```{r}
 rules <- apriori(Groceries, parameter = list(support = 0.001, confidence = 0.05))
-rules
+summary(rules)
 ```
 
+Obtenemos las primeras tres reglas respecto a la métrica lift, que es una métrica popular de la fuerza de la regla.
 ```{r}
-rules
+inspect(head(rules, n = 3, by = "lift"))
 ```
+
+Resulta evidente que explorar las 5668 transacciones de forma manual no es una opción viable. Emplearemos diversas técnicas de visualización del paquete arulesViz las cuales comparten la siguiente interfaz:
+```{r}
+args(getS3method("plot", "rules"))
+```
+x representa el conjunto de reglas a ser vizualizadas, method es el método de visualización y meadure y shading contienen las mediciones de interés empleadas por la gráfica. 
+Por medio de engine es posible usasr diversos motores de graficación para visualizar la gráfica. El motor predeterminado típicamente usa grid, muchas gráficas pueden ser visualizadas con el motor "htmlwidget" en cual resulta en un widget HTML.
+
 
 ## Preparación de datos para arules
 
 ## Interfaz de arulesViz
 
 ## Técnicas y ejemplos de visualización con arulesViz
+
+### Scatter plot
+Es posible lograr una visualización simple de reglas de asociación por medio de la gráfica scatter plot con dos medidas de interés en los ejes. El método por omisión de reglas de asociación en arulesViz es el scatter plot empleando support y confidence en los ejes.. También se usa una tercera medición (lift, por omisión) como el color (o escala de grises de los puntos). Se incluye una escala del rango de valores que corresponde a los colores.
+```{r}
+plot(rules)
+```
+
+Analiza la gráfica, identifica las reglas que tengan un valores altos en la medición lift e indica para ellas si el valor de support es alto o bajo.
+
+
+
+Crea una gráfica scatter plot con support y confidence en los ejes, empleando coverage como medición asociada a la escala de colores.
+```{r}
+plot(rules, shading = "coverage")
+```
 
