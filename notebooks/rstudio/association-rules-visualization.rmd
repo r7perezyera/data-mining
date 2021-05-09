@@ -2,16 +2,45 @@
 title: "Association Rules Visualization - Exercices"
 output: html_notebook
 ---
-
-Install arulesViz package
+## Instalación y configuración de arulesViz
+Instalar el paquete arulesViz
 
 ```{r}
 install.packages("arulesViz")
 ```
 
-Load arulesViz library
-```{r}
+Cargar la librería arulesViz (carga automáticamente arules)
+
+```{r echo=TRUE}
 library("arulesViz")
 ```
 
+## arulesViz con dataset Groceries
+El dataset Groceries contiene información de ventas de una tienda de abarrotes con 9835 transaccionesy 169 items (grupos de productos).
+
+```{r}
+data("Groceries")
+summary(Groceries)
+```
+Responde a las siguientes preguntas de acuerdo a la información del paso anterior:
+- ¿Cuál es el valor de la métrica density?
+- Con base density, ¿consideras que la matriz de transacciones de Groceries es densa o dispersa?
+- ¿Cuántos items hay en la trasacción promedio?
+- ¿Cuál es el producto más popular?
+
+Efectuaremos minería de reglas de asociación por medio del algoritmo Apriori implementado en arules.
+```{r}
+rules <- apriori(Groceries, parameter = list(support = 0.001, confidence = 0.05))
+rules
+```
+
+```{r}
+rules
+```
+
+## Preparación de datos para arules
+
+## Interfaz de arulesViz
+
+## Técnicas y ejemplos de visualización con arulesViz
 
