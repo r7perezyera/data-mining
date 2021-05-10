@@ -4,15 +4,25 @@
 
 layout: default
 ---
-Hola
-# Presentaciones
 
-[Association rules](slides/association-rules.html)
+Bienvenidos.
 
-[Association rules visualization](slides/association-rules-visualization.html)
+# Association rules
+Se trata de un método de machine learning basado en reglas para descubrir relaciones interesantes entre variables en datasets grandes.
 
-# Notebooks
+Las reglas de asociación se crean al buscar patrones de la forma X=>Y en una base de datos de transacciones donde X y Y son conjuntos de items. 
 
-[Association rules visualization](notebooks/rstudio/association-rules-visualization.nb.html)
+## Introducción a Association Rules
+
+[Láminas](slides/association-rules.html)
+
+
+## Visualización de Association Rules
+
+[Láminas](slides/association-rules-visualization.html)
+
+[Ejercicios notebook RStudio](notebooks/rstudio/association-rules-visualization.nb.html)
+
+
 
 
