@@ -11,6 +11,9 @@ Instalar el paquete arulesViz
 
 ```{r}
 #install.packages("arulesViz")
+#install.packages("devtools")
+devtools::install_github("hadley/emo")
+library("emo")
 ```
 
 Cargar la librería arulesViz (carga automáticamente arules)
@@ -120,7 +123,8 @@ Las funciones interactivas incluyen:
 - Regresar a la última selección para mayor análisis, (botón end).
 
 Ejercicio
-:computer:
+
+`r emo::ji("computer")`
 
 Selecciona las reglas con mayor lift por medio del proceso box selection y el botón inspect. Podrás ver las reglas desplegadas en la terminal abajo del dispositivo de gráficas.
 
