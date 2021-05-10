@@ -21,6 +21,8 @@ Las reglas de asociación se crean al buscar patrones de la forma X=>Y en una ba
 
 [Láminas](slides/association-rules-visualization.html)
 
+
+:computer:
 [Ejercicios notebook RStudio](notebooks/rstudio/association-rules-visualization.html)
 
 
