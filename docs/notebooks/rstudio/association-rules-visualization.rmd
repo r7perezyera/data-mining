@@ -1,5 +1,5 @@
 ---
-title: "Association Rules Visualization - Exercices"
+title: "Ejercicios de Visualización de Association Rules Visualization - Exercices"
 output:
   html_document:
     toc: true
@@ -7,32 +7,62 @@ output:
     df_print: paged
 ---
 ## Instalación y configuración de arulesViz
-Instalar el paquete arulesViz
+Instalar los paquetes requeridos para este ejercicio arulesViz
+
+En caso que no tengas insalados los paquetes de R requeridos para este notebook será necesario que retires los comentarios y ejecutes la siguiente celda.
+
+El símbolo de comentarios en R es #
+
+Tip: Si ya instalaste los paquetes puedes colocar nuevamente cada línea en comentarios.
 
 ```{r}
 #install.packages("arulesViz")
 #install.packages("devtools")
-devtools::install_github("hadley/emo")
-library("emo")
+#devtools::install_github("hadley/emo")
+
 ```
 
 Cargar la librería arulesViz (carga automáticamente arules)
 
 ```{r echo=TRUE}
 library("arulesViz")
+library("emo")
 ```
 
 ## arulesViz con dataset Groceries
 El dataset Groceries contiene información de ventas de una tienda de abarrotes con 9835 transaccionesy 169 items (grupos de productos).
-
 ```{r}
 data("Groceries")
 summary(Groceries)
+
 ```
+
+Trabajaremos con una muestra del 80% de los elementos del dataset. Para lograr resultados reproducibles asigna el valor de los dígitos de tu matrícula en el siguiente estatuto.
+
+```{r}
+STUDENT_ID = 0 #Sustituir por los dígitos de tu matrícula.
+```
+
+Ejecuta el siguiente código para obtener una muestra del 80% de las transacciones de Groceries, las cuales estarán referenciadas en `myGroceries`
+
+```{r}
+numTransactions <- round(length(Groceries) * 0.8)
+set.seed(STUDENT_ID)
+myGroceries <- sample(Groceries, numTransactions)
+summary(myGroceries)
+
+```
+`r emo::ji("question")`
+PREGUNTAS ARV-01
+
 Responde a las siguientes preguntas de acuerdo a la información del paso anterior:
+
 - ¿Cuál es el valor de la métrica density?
+
 - Con base density, ¿consideras que la matriz de transacciones de Groceries es densa o dispersa?
+
 - ¿Cuántos items hay en la trasacción promedio?
+
 - ¿Cuál es el producto más popular?
 
 Efectuaremos minería de reglas de asociación por medio del algoritmo Apriori implementado en arules.

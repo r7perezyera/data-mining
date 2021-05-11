@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Visualization of Association Rules</title>
+  <title>Visualización de Association Rules</title>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -19,7 +19,7 @@
     var SLIDE_CONFIG = {
       // Slide settings
       settings: {
-                title: 'Visualization of Association Rules',
+                title: 'Visualización de Association Rules',
                         useBuilds: true,
         usePrettify: true,
         enableSlideAreas: true,
@@ -107,7 +107,7 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">8 de mayo de 2021</p>
+            <p style="margin-top: 6px; margin-left: -2px;">10 de mayo de 2021</p>
           </hgroup>
   </slide>
 
@@ -120,12 +120,14 @@ slide:not(.current) .plotly.html-widget{
 <ul>
 <li>Support: proporción de transacciones que contienen el itemset.</li>
 <li>Confidence: probabilidad de encontrar el RHS (Y) de la regla en transacciones bajo la condición que éstas también incluyan LHS (X).</li>
-<li>Lift: Desviación del soporte de toda la regla del soporte esperado bajo independencia de ambos lados de la regla</li>
+<li>Lift: Desviación del soporte de toda la regla del soporte esperado bajo independencia de ambos lados de la regla.</li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>Proceso de generación de reglas de asociación</h2></hgroup><article  id="proceso-de-generación-de-reglas-de-asociación">
 
-<p>1: Generar el conjunto de todos los itemsets frecuentes del dataset (valor mínimo de support). 2: Generar todas las posibles reglas de cada itemset frecuente eliminando aquellas que no cumplan con valor mínimo de confidence.</p>
+<p>1: Generar el conjunto de todos los itemsets frecuentes del dataset (valor mínimo de support).</p>
+
+<p>2: Generar todas las posibles reglas de cada itemset frecuente eliminando aquellas que no cumplan con valor mínimo de confidence.</p>
 
 </article></slide><slide class=""><hgroup><h2>El reto</h2></hgroup><article  id="el-reto">
 
@@ -141,7 +143,7 @@ slide:not(.current) .plotly.html-widget{
 </article></slide><slide class=""><hgroup><h2>Visualización al rescate</h2></hgroup><article  id="visualización-al-rescate">
 
 <ul>
-<li>Fase exploratoria: : encontrar características interesantes e importantes de los datos:</li>
+<li>Fase exploratoria: encontrar características interesantes e importantes de los datos:</li>
 <li><p>Altamente iterativa empleando filtros, distintas escalas (zoom) y reacomodo de datos.</p></li>
 <li><p>Fase explicativa: compartir la información con audiencias más amplias, destacar hallazgos.</p></li>
 </ul>
@@ -164,6 +166,8 @@ slide:not(.current) .plotly.html-widget{
 <p>Paquete del lenguaje R para visualizar reglas de asociación e itemsets frecuentes.</p>
 
 </article></slide><slide class=""><hgroup><h2>Ejemplo de visualización de AR</h2></hgroup><article  id="ejemplo-de-visualización-de-ar">
+
+<p>Ver notebook de ejemplo</p>
 
 <pre >## Loading required package: arules</pre>
 
