@@ -37,7 +37,7 @@ Carga la librería emo (opcional, para desplegar emoticones `r emo::ji("smile")`
 library("emo")
 ```
 
-## Groceries: Elementos de la clase transactions
+## Transactions: Elementos de la clase y ejemplo con data set Groceries
 Groceries contiene información de ventas de una tienda de abarrotes con 9835 transacciones y 169 items (grupos de productos). Carga Groceries y visualiza su información general.
 ```{r}
 data("Groceries")
@@ -50,7 +50,7 @@ Examina la estructura de Groceries
 str(Groceries)
 ```
 
-Observa que la clase de Groceries es de tipo 'transactions' y contiene tres slots identificados como @data, @itemInfo e @itemsetInfo.
+Observa que la clase de Groceries es de tipo `transactions` y contiene tres slots identificados como @data, @itemInfo e @itemsetInfo.
 
 `data` es un objeto de la clase `ngCMatrix` que almacena una matriz de incidencia binaria.
 
@@ -86,32 +86,32 @@ summary(myGroceries)
 `r emo::ji("document")`
 **DOCUMENTO ARV-01**
 
-Elabora una tabla comparando los valores de las siguientes métricas de acuerdo a la información reportada por summary(Groceries) y summary(myGroceries):
+Elabora una tabla comparando los valores de las siguientes métricas de acuerdo a la información reportada por `summary(Groceries)` y `summary(myGroceries)`:
 
-- número de reglones
+- número de reglones.
 
-- número de columnas
+- número de columnas.
 
-- densidad
+- densidad.
 
-- item más frecuente (nombre y frecuencia)
+- item más frecuente (nombre y frecuencia).
 
-- Media aritmética (Mean)
+- Media aritmética (Mean).
 
 Responde a las siguientes preguntas:
 
-- Con base density, ¿consideras que la matriz de transacciones de myGroceries es densa o dispersa?
+- De acuerdo al valor de density, ¿consideras que la matriz de transacciones de myGroceries es densa o dispersa?
 
 - ¿Cuántos items hay en la trasacción promedio?
 
-- ¿Cuál es el producto más popular?
+- ¿Cuál es el producto de mayor frecuencia?
 
 ## Visualización básica de transacciones
 
 El método `itemFrequencyPlot` crea una gráfica de barras que permite inspeccionar la frecuencia de items para objetos basados en `itemMatrix` como `transactions`, `itemsets` y `rules`.
 
 
-Visualizaremos la gráfica de frecuencia para myGroceries con los parámetros por omisión.
+Visualizaremos la gráfica de frecuencia de items en myGroceries con los parámetros por omisión.
 ```{r}
 itemFrequencyPlot(myGroceries)
 ```
@@ -122,15 +122,15 @@ Para este caso, la gráfica tiene demasiada información por lo que su interpret
 
 `r emo::ji("computer")`
 **EJERCICIO-ARV01**
-Visualiza myGroceries filtrando por los primeros 30 items.
+Visualiza la frecuencia de items en myGroceries filtrando por los primeros 30 items.
 ```{r}
 #TODO: Modifica el valor de topN a 30
 itemFrequencyPlot(myGroceries, topN = 100)
 ```
 
-## Minería de reglas de asociación por medio del algoritmo apriori
+## Algoritmo apriori: Minería de reglas de asociación 
 
-Apriori es un algoritmo que cuenta transacciones por medio de una estrategia orientada a nivel y por amplitud primero (en contraste con profundidad). Fue desarrollado por Agrawal y Srikant (1994). Se utiliza para generar reglas de asociación, identificar itemsets, itemsets de frecuencia máxima, itemsets de frecuencia cerrada.
+Apriori es un algoritmo que cuenta transacciones por medio de una estrategia orientada a nivel y por amplitud primero (en contraste con profundidad). Fue desarrollado por Agrawal y Srikant (1994). Se utiliza para generar reglas de asociación, identificar itemsets, itemsets de frecuencia máxima e itemsets de frecuencia cerrada.
 
 
 Efectuaremos minería de reglas de asociación por medio del algoritmo Apriori implementado en arules.
@@ -153,14 +153,14 @@ Documenta los siguientes datos de la salida de arules:
 - Media aritmética de la distribución de reglas.
 
 
-
+## Estructura de la clase rules
 
 Examinaremos el objeto rules
 ```{r}
 str(rules)
 ```
 
-La clase rules representa a un conjunto de reglas las cuales generalmente se crean por medio de la invocación de un algoritmo de minería de reglas de asociación como `apriori`. Las reglas almacenan el LHS y el RHS de forma separada como objetos de la clase `itemMatrix`.
+La clase `rules` representa a un conjunto de reglas las cuales generalmente se crean por medio de la invocación de un algoritmo de minería de reglas de asociación como `apriori`. Las reglas almacenan el LHS y el RHS de forma separada como objetos de la clase `itemMatrix`.
 
 Las reglas minadas típicamente contienen diversas mediciones de interés las cuales pueden accederse por medio del método `quality`. Es posible calcular mediciones adicionales por medio de `interestMeasure`
 
@@ -176,6 +176,16 @@ args(getS3method("plot", "rules"))
 x representa el conjunto de reglas a ser vizualizadas, method es el método de visualización y meadure y shading contienen las mediciones de interés empleadas por la gráfica. 
 Por medio de engine es posible usasr diversos motores de graficación para visualizar la gráfica. El motor predeterminado típicamente usa grid, muchas gráficas pueden ser visualizadas con el motor "htmlwidget" en cual resulta en un widget HTML.
 
+
+Para conocer las medidas disponibles en el conjunto de reglas empleamos el método quality.
+
+```{r}
+head(quality(rules))
+```
+
+Estas son las medidas generadas por omisión con el algoritmo Apriori. Para añadir otras mediciones es posible emplear la función interestMeasures() de la librería arules.
+
+
 ## Itemsetinfo
 `itemsetInfo` es un data.frame con un renglón por transacción (cada transacción se considera un itemset). El data.frame puede contener columnas con información adicional, p.e. IDs de transacciones o de usuarios. Es posible acceder a sus elementos por medio de `transactionInfo` 
 
@@ -183,10 +193,6 @@ El método `itemsetInfo()` permite visualizar información de itemsets específi
 ```{r}
 itemsetInfo(Groceries[1:5])
 ```
-
-## Preparación de datos para arules
-
-## Interfaz de arulesViz
 
 ## Técnicas y ejemplos de visualización con arulesViz
 
@@ -200,13 +206,6 @@ Analiza la gráfica, identifica las reglas que tengan un valores altos en la med
 
 Es posible emplear en los ejes del scatter plot cualquier medición de calidad almacenada en el slot de calidad del conjunto de reglas (vector de longitud 2 para el parámetro measure) o para el gradiente de color (shading).
 
-Para conocer las medidsa disponibles en el conjunto de reglas empleamos el método quality.
-
-```{r}
-head(quality(rules))
-```
-
-Estas son las medidsa generadas por omisión con el algoritmo Apriori. Para añadir otras mediciones es posible emplear la función interestMeasures() de la librería arules.
 
 Ejercicio
 Modifica el código de abajo para crear un scatter plot con las siguientes propiedades:
@@ -219,7 +218,7 @@ Modifica el código de abajo para crear un scatter plot con las siguientes propi
 plot(rules, measure = c("lift", "support"), shading = "confidence")
 ```
 
-
+`r emo::ji("computer")`
 Ejercicio
 Modifica el código de abajo para crear una gráfica scatter plot con support y confidence en los ejes horizontal y vertical, empleando coverage como medición asociada a la escala de colores.
 ```{r}
@@ -252,9 +251,9 @@ Las funciones interactivas incluyen:
 - Mostrar mayor o menor detalle en una región seleccionada (botones zoom in / zoom out).
 - Regresar a la última selección para mayor análisis, (botón end).
 
+`r emo::ji("computer")`
 Ejercicio
 
-`r emo::ji("computer")`
 
 Selecciona las reglas con mayor lift por medio del proceso box selection y el botón inspect. Podrás ver las reglas desplegadas en la terminal abajo del dispositivo de gráficas.
 
