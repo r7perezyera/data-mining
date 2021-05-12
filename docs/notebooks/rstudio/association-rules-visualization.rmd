@@ -1,5 +1,5 @@
 ---
-title: "Ejercicios de Visualización de Association Rules Visualization - Exercices"
+title: "Ejercicios de Visualización de Association Rules"
 output:
   html_document:
     toc: true
@@ -7,14 +7,16 @@ output:
     df_print: paged
 ---
 ## Instalación y configuración de arulesViz
-Instalar los paquetes requeridos para este ejercicio arulesViz
+Instala los paquetes requeridos para este notebook.
 
 En caso que no tengas insalados los paquetes de R requeridos para este notebook será necesario que retires los comentarios y ejecutes la siguiente celda.
 
 El símbolo de comentarios en R es #
 
-Tip: Si ya instalaste los paquetes puedes colocar nuevamente cada línea en comentarios.
+Tip: Si ya instalaste los paquetes puedes colocar cada línea en comentarios nuevamente.
 
+`r emo::ji("computer")`
+EJERCICIO-ARV01
 ```{r}
 #install.packages("arulesViz")
 #install.packages("devtools")
@@ -22,25 +24,51 @@ Tip: Si ya instalaste los paquetes puedes colocar nuevamente cada línea en come
 
 ```
 
-Cargar la librería arulesViz (carga automáticamente arules)
-
+Carga la librería arulesViz (carga automáticamente arules).
 ```{r echo=TRUE}
 library("arulesViz")
+```
+
+Carga la librería emo (opcional, para desplegar emoticones).
+```{r}
 library("emo")
 ```
 
-## arulesViz con dataset Groceries
-El dataset Groceries contiene información de ventas de una tienda de abarrotes con 9835 transaccionesy 169 items (grupos de productos).
+
+## arulesViz con transacciones Groceries
+Groceries contiene información de ventas de una tienda de abarrotes con 9835 transacciones y 169 items (grupos de productos). Carga Groceries y visualiza su información general.
 ```{r}
 data("Groceries")
 summary(Groceries)
 
 ```
 
-Trabajaremos con una muestra del 80% de los elementos del dataset. Para lograr resultados reproducibles asigna el valor de los dígitos de tu matrícula en el siguiente estatuto.
+Examina el tipo de datos de Groceries
+```{r}
+str(Groceries)
+```
+
+Observa que la clase de Groceries es 'transactions' y contiene tres slots identificados como @data, @itemInfo y @itemsetInfo
+
+itemsetInfo es un data.frame con un renglón por transacción (cada transacción se considera un itemset). El data.frame puede contener columnas con información adicional, p.e. IDs de transacciones o de usuarios. Es acceder a sus elementos por medio de `transactionInfo` 
+
+El método `itemInfo()` permite visualizar información de items específicos de un objeto transactions.
+```{r}
+itemInfo(Groceries[1:5])
+```
+
+El método `itemsetInfo()` permite visualizar información de itemsets específicos así como sus medidas de calidad. Nótese que en este momento el objeto Groceries no cuenta con itemsets.
+```{r}
+itemsetInfo(Groceries[1:5])
+```
+
+`r emo::ji("computer")`
+EJERCICIO-ARV01
+
+Trabajaremos con una muestra del 80% de los elementos del dataset. Para lograr resultados reproducibles asigna el valor de los dígitos de tu matrícula en el siguiente estatuto (p.e. 430000).
 
 ```{r}
-STUDENT_ID = 0 #Sustituir por los dígitos de tu matrícula.
+STUDENT_ID = 0 #Sustituir por los dígitos de tu matrícula (p.e. 430000).
 ```
 
 Ejecuta el siguiente código para obtener una muestra del 80% de las transacciones de Groceries, las cuales estarán referenciadas en `myGroceries`
@@ -52,18 +80,37 @@ myGroceries <- sample(Groceries, numTransactions)
 summary(myGroceries)
 
 ```
-`r emo::ji("question")`
-PREGUNTAS ARV-01
+`r emo::ji("document")`
+DOCUMENTO ARV-01
 
-Responde a las siguientes preguntas de acuerdo a la información del paso anterior:
+Elabora una tabla comparando los valores de las siguientes métricas de acuerdo a la información reportada por summary(Groceries) y summary(myGroceries):
 
-- ¿Cuál es el valor de la métrica density?
+- número de reglones
+
+- número de columnas
+
+- densidad
+
+- item más frecuente (nombre y frecuencia)
+
+- Media aritmética (Mean)
+
 
 - Con base density, ¿consideras que la matriz de transacciones de Groceries es densa o dispersa?
 
 - ¿Cuántos items hay en la trasacción promedio?
 
 - ¿Cuál es el producto más popular?
+
+Visualizaremos 
+
+`r emo::ji("computer")`
+CODIGO-ARV01
+```{r}
+itemFrequencyPlot(myGroceries, topN = 30)
+```
+
+
 
 Efectuaremos minería de reglas de asociación por medio del algoritmo Apriori implementado en arules.
 ```{r}
