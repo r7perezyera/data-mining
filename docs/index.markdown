@@ -14,7 +14,7 @@ Las reglas de asociación se crean al buscar patrones de la forma X=>Y en una ba
 
 ## Introducción a Association Rules
 
-[Láminas](slides/association-rules.html)
+[Láminas (incluye notebook con ejercicios)](slides/association-rules.html)
 
 
 ## Visualización de Association Rules
