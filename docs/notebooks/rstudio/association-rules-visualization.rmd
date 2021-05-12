@@ -122,6 +122,7 @@ Para este caso, la gráfica tiene demasiada información por lo que su interpret
 
 `r emo::ji("computer")`
 **EJERCICIO-ARV01**
+
 Visualiza la frecuencia de items en myGroceries filtrando por los primeros 30 items.
 ```{r}
 #TODO: Modifica el valor de topN a 30
@@ -195,11 +196,13 @@ Es posible emplear en los ejes del scatter plot cualquier medición de calidad a
 
 `r emo::ji("document")`
 **DOCUMENTO ARV-01**
+
 Analiza la gráfica, identifica las reglas que tengan un valores altos en la medición lift e indica para ellas si el valor de support es alto o bajo.
 
 
 `r emo::ji("computer")`
 **EJERCICIO ARV-01**
+
 Modifica el código de abajo para crear un scatter plot con las siguientes propiedades:
 - support en el eje horizontal (h-axis)
 - lift en el eje vertical (v-xaix)
@@ -217,6 +220,7 @@ plot(rules, measure = c("lift", "support"), shading = "confidence")
 
 `r emo::ji("computer")`
 **EJERCICIO ARV-01**
+
 Modifica el código de abajo para crear una gráfica scatter plot con support y confidence en los ejes horizontal y vertical, empleando coverage como medición asociada a la escala de colores.
 ```{r}
 #TODO: Scatter plot con support y confidence en los ejes horizontal y vertical, empleando coverage como medición asociada a la escala de colores
@@ -237,6 +241,7 @@ plot(rules, method= "two-key plot")
 
 `r emo::ji("document")`
 **DOCUMENTO ARV-01**
+
 Responde: ¿Qué tipo de relación muestran order y support en esta visualización?
 
 
@@ -253,13 +258,3 @@ Las funciones interactivas incluyen:
 - Inspeccionar conjuntos de reglas al seleccionar una región rectangular de la gráfica y dar click en el botón inspect.
 - Mostrar mayor o menor detalle en una región seleccionada (botones zoom in / zoom out).
 - Regresar a la última selección para mayor análisis, (botón end).
-
-`r emo::ji("computer")`
-Ejercicio
-
-
-Selecciona las reglas con mayor lift por medio del proceso box selection y el botón inspect. Podrás ver las reglas desplegadas en la terminal abajo del dispositivo de gráficas.
-
-
-
-
