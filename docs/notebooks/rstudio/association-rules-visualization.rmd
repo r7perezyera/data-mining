@@ -65,7 +65,7 @@ inspect(Groceries[1:10])
 ## myGroceries: Muestra de las transacciones de Groceries
 
 `r emo::ji("computer")`
-**EJERCICIO-ARV01**
+**EJERCICIO-ARV02**
 
 Trabajaremos con una muestra del 80% de las transacciones de Groceries. Para lograr resultados reproducibles asigna el valor de los dígitos de tu matrícula en el siguiente bloque de código (p.e. 430000).
 
@@ -121,7 +121,7 @@ Para este caso, la gráfica tiene demasiada información por lo que su interpret
 `itemFrequencyPlot`cuenta con parámetros adicionales para filtar items.
 
 `r emo::ji("computer")`
-**EJERCICIO-ARV01**
+**EJERCICIO-ARV03**
 
 Visualiza la frecuencia de items en myGroceries filtrando por los primeros 30 items.
 ```{r}
@@ -143,7 +143,7 @@ summary(rules)
 ```
 
 `r emo::ji("document")`
-**DOCUMENTO ARV-01**
+**DOCUMENTO ARV-02**
 
 Documenta los siguientes datos de la salida de arules:
 
@@ -195,17 +195,20 @@ plot(rules)
 Es posible emplear en los ejes del scatter plot cualquier medición de calidad almacenada en el slot de calidad del conjunto de reglas (vector de longitud 2 para el parámetro measure) o para el gradiente de color (shading).
 
 `r emo::ji("document")`
-**DOCUMENTO ARV-01**
+**DOCUMENTO ARV-03**
 
 Analiza la gráfica, identifica las reglas que tengan un valores altos en la medición lift e indica para ellas si el valor de support es alto o bajo.
 
 
 `r emo::ji("computer")`
-**EJERCICIO ARV-01**
+**EJERCICIO ARV-04**
 
 Modifica el código de abajo para crear un scatter plot con las siguientes propiedades:
+
 - support en el eje horizontal (h-axis)
+
 - lift en el eje vertical (v-xaix)
+
 - confidence (measure) como gradiente de color (shading)
 
 ```{r}
@@ -219,7 +222,7 @@ plot(rules, measure = c("lift", "support"), shading = "confidence")
 ```
 
 `r emo::ji("computer")`
-**EJERCICIO ARV-01**
+**EJERCICIO ARV-05**
 
 Modifica el código de abajo para crear una gráfica scatter plot con support y confidence en los ejes horizontal y vertical, empleando coverage como medición asociada a la escala de colores.
 ```{r}
@@ -240,12 +243,12 @@ plot(rules, method= "two-key plot")
 ```
 
 `r emo::ji("document")`
-**DOCUMENTO ARV-01**
+**DOCUMENTO ARV-04**
 
 Responde: ¿Qué tipo de relación muestran order y support en esta visualización?
 
 
-### Scatterl plots interactivos en arulesViz
+### Scatter plots interactivos en arulesViz
 
 El método plot ofrece características interactivas para seleccionar reglas y mostrar mayor o menor detalle en la gráfica (zoom in y zoom out) las cuales son útiles tareas de exploración. La interacción se activa por medio del parámetro engine = "interactive".
 
