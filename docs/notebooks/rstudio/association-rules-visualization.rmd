@@ -155,7 +155,7 @@ Documenta los siguientes datos de la salida de arules:
 
 ## Estructura de la clase rules
 
-Examinaremos el objeto rules
+Examinaremos la estructura del objeto rules
 ```{r}
 str(rules)
 ```
@@ -169,60 +169,60 @@ Obtenemos las primeras tres reglas respecto a la métrica lift, que es una métr
 inspect(head(rules, n = 3, by = "lift"))
 ```
 
-Resulta evidente que explorar las 5668 transacciones de forma manual no es una opción viable. Emplearemos diversas técnicas de visualización del paquete arulesViz las cuales comparten la siguiente interfaz:
-```{r}
-args(getS3method("plot", "rules"))
-```
-x representa el conjunto de reglas a ser vizualizadas, method es el método de visualización y meadure y shading contienen las mediciones de interés empleadas por la gráfica. 
-Por medio de engine es posible usasr diversos motores de graficación para visualizar la gráfica. El motor predeterminado típicamente usa grid, muchas gráficas pueden ser visualizadas con el motor "htmlwidget" en cual resulta en un widget HTML.
-
-
-Para conocer las medidas disponibles en el conjunto de reglas empleamos el método quality.
+Para conocer las medidas disponibles en el conjunto de reglas empleamos el método `quality`.
 
 ```{r}
 head(quality(rules))
 ```
+Estas son las medidas generadas por omisión con el algoritmo Apriori. Para añadir otras mediciones es posible emplear la función `interestMeasures()` de la librería arules.
 
-Estas son las medidas generadas por omisión con el algoritmo Apriori. Para añadir otras mediciones es posible emplear la función interestMeasures() de la librería arules.
 
-
-## Itemsetinfo
-`itemsetInfo` es un data.frame con un renglón por transacción (cada transacción se considera un itemset). El data.frame puede contener columnas con información adicional, p.e. IDs de transacciones o de usuarios. Es posible acceder a sus elementos por medio de `transactionInfo` 
-
-El método `itemsetInfo()` permite visualizar información de itemsets específicos así como sus medidas de calidad. Nótese que en este momento el objeto Groceries no cuenta con itemsets.
+Resulta evidente que explorar las decenas de miles de transacciones de forma manual no es una opción viable. Emplearemos diversas técnicas de visualización del paquete arulesViz las cuales comparten la siguiente interfaz:
 ```{r}
-itemsetInfo(Groceries[1:5])
+args(getS3method("plot", "rules"))
 ```
+`x` representa el conjunto de reglas a ser vizualizadas, `method` es el método de visualización y `measure` y `shading` contienen las mediciones de interés empleadas por la gráfica. 
+Por medio de `engine` es posible usar diversos motores de graficación para visualizar las reglas. El motor predeterminado típicamente usa `grid`, muchas gráficas pueden ser visualizadas con el motor "htmlwidget" en cual resulta en un widget HTML.
 
 ## Técnicas y ejemplos de visualización con arulesViz
 
 ### Scatter plot
-Es posible lograr una visualización simple de reglas de asociación por medio de la gráfica scatter plot con dos medidas de interés en los ejes. El método por omisión de reglas de asociación en arulesViz es el scatter plot empleando support y confidence en los ejes.. También se usa una tercera medición (lift, por omisión) como el color (o escala de grises de los puntos). Se incluye una escala del rango de valores que corresponde a los colores.
+Es posible lograr una visualización simple de reglas de asociación por medio de la gráfica scatter plot con dos medidas de interés en los ejes. El método por omisión de reglas de asociación en arulesViz es el scatter plot empleando support y confidence en los ejes. También se usa una tercera medición (lift, por omisión) como el color (o escala de grises de los puntos). Se incluye una escala del rango de valores que corresponde a los colores.
 ```{r}
 plot(rules)
 ```
-
-Analiza la gráfica, identifica las reglas que tengan un valores altos en la medición lift e indica para ellas si el valor de support es alto o bajo.
-
 Es posible emplear en los ejes del scatter plot cualquier medición de calidad almacenada en el slot de calidad del conjunto de reglas (vector de longitud 2 para el parámetro measure) o para el gradiente de color (shading).
 
+`r emo::ji("document")`
+**DOCUMENTO ARV-01**
+Analiza la gráfica, identifica las reglas que tengan un valores altos en la medición lift e indica para ellas si el valor de support es alto o bajo.
 
-Ejercicio
+
+`r emo::ji("computer")`
+**EJERCICIO ARV-01**
 Modifica el código de abajo para crear un scatter plot con las siguientes propiedades:
 - support en el eje horizontal (h-axis)
 - lift en el eje vertical (v-xaix)
 - confidence (measure) como gradiente de color (shading)
 
 ```{r}
+#TODO: Asigna los parámetros a plot para:
+# support en el eje horizontal (h-axis)
+# lift en el eje vertical (v-xaix)
+# confidence (measure) como gradiente de color (shading)
+
 #plot(rules, measure = c("h-axis", "v-axis"), shading = "measure")
 plot(rules, measure = c("lift", "support"), shading = "confidence")
 ```
 
 `r emo::ji("computer")`
-Ejercicio
+**EJERCICIO ARV-01**
 Modifica el código de abajo para crear una gráfica scatter plot con support y confidence en los ejes horizontal y vertical, empleando coverage como medición asociada a la escala de colores.
 ```{r}
+#TODO: Scatter plot con support y confidence en los ejes horizontal y vertical, empleando coverage como medición asociada a la escala de colores
+
 # Por omisión la gráficas scatter plot en arulesViz presentan support en el eje horizontal y confidence en el eje vertical
+
 #plot(rules, shading="measure")
 plot(rules, shading = "lift")
 ```
@@ -235,7 +235,10 @@ Introducida por Unwin, Hoffmann y Bernt (2001), el Two-key pllot es una versión
 plot(rules, method= "two-key plot")
 ```
 
-¿Qué tipo de relación mueestran order y support en esta visualización?
+`r emo::ji("document")`
+**DOCUMENTO ARV-01**
+Responde: ¿Qué tipo de relación muestran order y support en esta visualización?
+
 
 ### Scatterl plots interactivos en arulesViz
 
