@@ -9,7 +9,7 @@ output:
 ## Instalación y configuración de arulesViz
 
 `r emo::ji("computer")`
-EJERCICIO-ARV01
+**EJERCICIO-ARV01**
 
 Instala los paquetes requeridos para este notebook.
 
@@ -37,7 +37,7 @@ Carga la librería emo (opcional, para desplegar emoticones `r emo::ji("smile")`
 library("emo")
 ```
 
-## arulesViz con transacciones Groceries
+## Groceries: Elementos de la clase transactions
 Groceries contiene información de ventas de una tienda de abarrotes con 9835 transacciones y 169 items (grupos de productos). Carga Groceries y visualiza su información general.
 ```{r}
 data("Groceries")
@@ -50,37 +50,31 @@ Examina la estructura de Groceries
 str(Groceries)
 ```
 
-Observa que la clase de Groceries es de tipo 'transactions' y contiene tres slots identificados como @data, @itemInfo y @itemsetInfo
+Observa que la clase de Groceries es de tipo 'transactions' y contiene tres slots identificados como @data, @itemInfo e @itemsetInfo.
 
 `data` es un objeto de la clase `ngCMatrix` que almacena una matriz de incidencia binaria.
 
 `itemInfo` es un `data.frame` que almacena las etiquetas de los items.
 
-El método `itemInfo()` permite visualizar información de items específicos de un objeto transactions.
+El método `inspect()` permite desplegar información de transacciones al igual que asociaciones.
 ```{r}
-itemInfo(Groceries[1])
+inspect(Groceries[1:10])
 ```
 
-`itemsetInfo` es un data.frame con un renglón por transacción (cada transacción se considera un itemset). El data.frame puede contener columnas con información adicional, p.e. IDs de transacciones o de usuarios. Es posible acceder a sus elementos por medio de `transactionInfo` 
 
-El método `itemsetInfo()` permite visualizar información de itemsets específicos así como sus medidas de calidad. Nótese que en este momento el objeto Groceries no cuenta con itemsets.
-```{r}
-itemsetInfo(Groceries[1:5])
-```
-
-## Creación de muestra de Groceries
+## myGroceries: Muestra de las transacciones de Groceries
 
 `r emo::ji("computer")`
-EJERCICIO-ARV01
+**EJERCICIO-ARV01**
 
-Trabajaremos con una muestra del 80% de los elementos del dataset. Para lograr resultados reproducibles asigna el valor de los dígitos de tu matrícula en el siguiente estatuto (p.e. 430000).
+Trabajaremos con una muestra del 80% de las transacciones de Groceries. Para lograr resultados reproducibles asigna el valor de los dígitos de tu matrícula en el siguiente bloque de código (p.e. 430000).
 
 ```{r}
 #TODO: Asigna a STUDENT_ID los dígitos de tu matrícula (p.e. 430000).
 STUDENT_ID = 0 
 ```
 
-Ejecuta el siguiente código para obtener una muestra del 80% de las transacciones de Groceries, las cuales estarán referenciadas en `myGroceries`
+Ejecuta el siguiente bloque de código para obtener una muestra del 80% de las transacciones de Groceries, las cuales estarán referenciadas en la variable `myGroceries`.
 
 ```{r}
 numTransactions <- round(length(Groceries) * 0.8)
@@ -90,7 +84,7 @@ summary(myGroceries)
 
 ```
 `r emo::ji("document")`
-DOCUMENTO ARV-01
+**DOCUMENTO ARV-01**
 
 Elabora una tabla comparando los valores de las siguientes métricas de acuerdo a la información reportada por summary(Groceries) y summary(myGroceries):
 
@@ -106,13 +100,13 @@ Elabora una tabla comparando los valores de las siguientes métricas de acuerdo 
 
 Responde a las siguientes preguntas:
 
-- Con base density, ¿consideras que la matriz de transacciones de Groceries es densa o dispersa?
+- Con base density, ¿consideras que la matriz de transacciones de myGroceries es densa o dispersa?
 
 - ¿Cuántos items hay en la trasacción promedio?
 
 - ¿Cuál es el producto más popular?
 
-## Visualización básica 
+## Visualización básica de transacciones
 
 El método `itemFrequencyPlot` crea una gráfica de barras que permite inspeccionar la frecuencia de items para objetos basados en `itemMatrix` como `transactions`, `itemsets` y `rules`.
 
@@ -122,32 +116,51 @@ Visualizaremos la gráfica de frecuencia para myGroceries con los parámetros po
 itemFrequencyPlot(myGroceries)
 ```
 
-Para este caso, a gráfica tiene demasiada información por lo que su interpretación es difícil.
+Para este caso, la gráfica tiene demasiada información por lo que su interpretación es difícil.
 
 `itemFrequencyPlot`cuenta con parámetros adicionales para filtar items.
 
 `r emo::ji("computer")`
-EJERCICIO-ARV01
+**EJERCICIO-ARV01**
 Visualiza myGroceries filtrando por los primeros 30 items.
 ```{r}
 #TODO: Modifica el valor de topN a 30
 itemFrequencyPlot(myGroceries, topN = 100)
 ```
 
-## Obtener reglas de asociación por medio del algoritmo apriori
+## Minería de reglas de asociación por medio del algoritmo apriori
+
+Apriori es un algoritmo que cuenta transacciones por medio de una estrategia orientada a nivel y por amplitud primero (en contraste con profundidad). Fue desarrollado por Agrawal y Srikant (1994). Se utiliza para generar reglas de asociación, identificar itemsets, itemsets de frecuencia máxima, itemsets de frecuencia cerrada.
+
 
 Efectuaremos minería de reglas de asociación por medio del algoritmo Apriori implementado en arules.
+
+Visualiza la salida de la consola de R para examinar la salida del algoritmo.
 ```{r}
 rules <- apriori(myGroceries, parameter = list(support = 0.001, confidence = 0.05))
 summary(rules)
 ```
+
+`r emo::ji("document")`
+**DOCUMENTO ARV-01**
+
+Documenta los siguientes datos de la salida de arules:
+
+- Número de reglas producidas.
+
+- Distribución del tamaño de las reglas (lhs + rhs).
+
+- Media aritmética de la distribución de reglas.
+
+
+
 
 Examinaremos el objeto rules
 ```{r}
 str(rules)
 ```
 
-La clase rulese representa a un conjunto de reglas las cuales generalmente se crean por medio de la invocación de un algoritmo de minería de reglas de asociación como `apriori`. Las reglas almacenan el LHS y el RHS de forma separada como objetos de la clase `itemMatrix`.
+La clase rules representa a un conjunto de reglas las cuales generalmente se crean por medio de la invocación de un algoritmo de minería de reglas de asociación como `apriori`. Las reglas almacenan el LHS y el RHS de forma separada como objetos de la clase `itemMatrix`.
 
 Las reglas minadas típicamente contienen diversas mediciones de interés las cuales pueden accederse por medio del método `quality`. Es posible calcular mediciones adicionales por medio de `interestMeasure`
 
@@ -163,6 +176,13 @@ args(getS3method("plot", "rules"))
 x representa el conjunto de reglas a ser vizualizadas, method es el método de visualización y meadure y shading contienen las mediciones de interés empleadas por la gráfica. 
 Por medio de engine es posible usasr diversos motores de graficación para visualizar la gráfica. El motor predeterminado típicamente usa grid, muchas gráficas pueden ser visualizadas con el motor "htmlwidget" en cual resulta en un widget HTML.
 
+## Itemsetinfo
+`itemsetInfo` es un data.frame con un renglón por transacción (cada transacción se considera un itemset). El data.frame puede contener columnas con información adicional, p.e. IDs de transacciones o de usuarios. Es posible acceder a sus elementos por medio de `transactionInfo` 
+
+El método `itemsetInfo()` permite visualizar información de itemsets específicos así como sus medidas de calidad. Nótese que en este momento el objeto Groceries no cuenta con itemsets.
+```{r}
+itemsetInfo(Groceries[1:5])
+```
 
 ## Preparación de datos para arules
 
