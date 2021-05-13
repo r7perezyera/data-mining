@@ -336,7 +336,7 @@ Obten el conjunto de reglas de asociación cuyo RHS sea workclass=Private y su l
 ## Filtrado de objeto rules - sector laboral privado
 ```{r}
 #Completa los parámetros de la siguiente línea
-#rulesWorkClassPrivate <- subset(rules, subset = rhs %in% "" & lift >0)
+rulesWorkClassPrivate <- subset(rules, subset = rhs %in% "workclass=Private" & lift >1.2)
 ```
 
 ## Ejercicio AR-02
@@ -344,7 +344,7 @@ Inspecciona las primeras cinco reglas ordenadas por soporte (support)
 ## Detalle de reglas - sector laboral privado
 ```{r}
 #"Completa los parámetros de la siguiente línea"
-#inspect(sort(rulesWorkClassPrivate, by = "")[1:3])
+inspect(sort(rulesWorkClassPrivate, by = "support")[1:5])
 
 ```
 ## Ejercicio AR-03
