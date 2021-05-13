@@ -1,10 +1,15 @@
 ---
 title: "Ejercicios de Visualización de Association Rules"
 output:
+  pdf_document:
+    toc: yes
+    latex_engine: xelatex
+  word_document:
+    toc: yes
   html_document:
-    toc: true
-    toc_float: true
     df_print: paged
+    toc: yes
+    toc_float: yes
 ---
 ## Instalación y configuración de arulesViz
 
@@ -15,7 +20,7 @@ Instala los paquetes requeridos para este notebook.
 
 En caso que los no tengas será necesario que retires los comentarios y ejecutes los comandos de la siguiente celda.
 
-El símbolo de comentarios en R es `#`
+<!-- El símbolo de comentarios en R es `#` -->
 
 Tip: Coloca nuevamente en comentario las líneas de abajo en cuanto hayas instalado los paquetes.
 
