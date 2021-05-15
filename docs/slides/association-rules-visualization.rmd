@@ -1,7 +1,7 @@
 ---
-title: "Visualization of Association Rules"
+title: "Visualización de Association Rules"
 author: "Marciano Moreno"
-date: "8 de mayo de 2021"
+date: "10 de mayo de 2021"
 output: ioslides_presentation
 ---
 
@@ -17,11 +17,12 @@ Diversas técnicas de visualización pueden contibuir a mejorar la productividad
 ## Métricas de interés
 - Support: proporción de transacciones que contienen el itemset.
 - Confidence:  probabilidad de encontrar el RHS (Y) de la regla en transacciones bajo la condición que éstas también incluyan LHS (X).
-- Lift: Desviación del soporte de toda la regla del soporte esperado bajo independencia de ambos lados de la regla
+- Lift: Desviación del soporte de toda la regla del soporte esperado bajo independencia de ambos lados de la regla.
 
 ## Proceso de generación de reglas de asociación
 
 1: Generar el conjunto de todos los itemsets frecuentes del dataset (valor mínimo de support).
+
 2: Generar todas las posibles reglas de cada itemset frecuente eliminando aquellas que no cumplan con valor mínimo de confidence.
 
 ## El reto 
@@ -35,7 +36,7 @@ Dado que cada itemset frecuente tendrá en el peor de los casos al menos dos reg
   
 ## Visualización al rescate
 
-- Fase exploratoria: : encontrar características interesantes e importantes de los datos:
+- Fase exploratoria: encontrar características interesantes e importantes de los datos:
   - Altamente iterativa empleando filtros, distintas escalas (zoom) y reacomodo de datos.
   
 - Fase explicativa: compartir la información con audiencias más amplias, destacar hallazgos.
@@ -60,6 +61,7 @@ Paquete del lenguaje R para visualizar reglas de asociación e itemsets frecuent
 
 
 ## Ejemplo de visualización de AR
+Ver notebook de ejemplo
 ```{r}
 library("arulesViz")
 ```

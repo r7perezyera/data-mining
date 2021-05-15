@@ -1,0 +1,268 @@
+---
+title: "Ejercicios de Visualización de Association Rules"
+output:
+  pdf_document:
+    toc: yes
+    latex_engine: xelatex
+  word_document:
+    toc: yes
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_float: yes
+---
+## Instalación y configuración de arulesViz
+
+`r emo::ji("computer")`
+**EJERCICIO-ARV01**
+
+Instala los paquetes requeridos para este notebook.
+
+En caso que los no tengas será necesario que retires los comentarios y ejecutes los comandos de la siguiente celda.
+
+<!-- El símbolo de comentarios en R es `#` -->
+
+Tip: Coloca nuevamente en comentario las líneas de abajo en cuanto hayas instalado los paquetes.
+
+```{r}
+#TODO: Retira los comentarios la primera vez para instalar los paquetes.
+#install.packages("arulesViz")
+#install.packages("devtools")
+#devtools::install_github("hadley/emo")
+
+```
+
+Carga la librería arulesViz (la cual carga automáticamente arules).
+```{r echo=TRUE}
+library("arulesViz")
+```
+
+Carga la librería emo (opcional, para desplegar emoticones `r emo::ji("smile")`).
+```{r}
+library("emo")
+```
+
+## Transactions: Elementos de la clase y ejemplo con data set Groceries
+Groceries contiene información de ventas de una tienda de abarrotes con 9835 transacciones y 169 items (grupos de productos). Carga Groceries y visualiza su información general.
+```{r}
+data("Groceries")
+summary(Groceries)
+
+```
+
+Examina la estructura de Groceries
+```{r}
+str(Groceries)
+```
+
+Observa que la clase de Groceries es de tipo `transactions` y contiene tres slots identificados como @data, @itemInfo e @itemsetInfo.
+
+`data` es un objeto de la clase `ngCMatrix` que almacena una matriz de incidencia binaria.
+
+`itemInfo` es un `data.frame` que almacena las etiquetas de los items.
+
+El método `inspect()` permite desplegar información de transacciones al igual que asociaciones.
+```{r}
+inspect(Groceries[1:10])
+```
+
+
+## myGroceries: Muestra de las transacciones de Groceries
+
+`r emo::ji("computer")`
+**EJERCICIO-ARV02**
+
+Trabajaremos con una muestra del 80% de las transacciones de Groceries. Para lograr resultados reproducibles asigna el valor de los dígitos de tu matrícula en el siguiente bloque de código (p.e. 430000).
+
+```{r}
+#TODO: Asigna a STUDENT_ID los dígitos de tu matrícula (p.e. 430000).
+STUDENT_ID = 0 
+```
+
+Ejecuta el siguiente bloque de código para obtener una muestra del 80% de las transacciones de Groceries, las cuales estarán referenciadas en la variable `myGroceries`.
+
+```{r}
+numTransactions <- round(length(Groceries) * 0.8)
+set.seed(STUDENT_ID)
+myGroceries <- sample(Groceries, numTransactions)
+summary(myGroceries)
+
+```
+`r emo::ji("document")`
+**DOCUMENTO ARV-01**
+
+Elabora una tabla comparando los valores de las siguientes métricas de acuerdo a la información reportada por `summary(Groceries)` y `summary(myGroceries)`:
+
+- número de reglones.
+
+- número de columnas.
+
+- densidad.
+
+- item más frecuente (nombre y frecuencia).
+
+- Media aritmética (Mean).
+
+Responde a las siguientes preguntas:
+
+- De acuerdo al valor de density, ¿consideras que la matriz de transacciones de myGroceries es densa o dispersa?
+
+- ¿Cuántos items hay en la trasacción promedio?
+
+- ¿Cuál es el producto de mayor frecuencia?
+
+## Visualización básica de transacciones
+
+El método `itemFrequencyPlot` crea una gráfica de barras que permite inspeccionar la frecuencia de items para objetos basados en `itemMatrix` como `transactions`, `itemsets` y `rules`.
+
+
+Visualizaremos la gráfica de frecuencia de items en myGroceries con los parámetros por omisión.
+```{r}
+itemFrequencyPlot(myGroceries)
+```
+
+Para este caso, la gráfica tiene demasiada información por lo que su interpretación es difícil.
+
+`itemFrequencyPlot`cuenta con parámetros adicionales para filtar items.
+
+`r emo::ji("computer")`
+**EJERCICIO-ARV03**
+
+Visualiza la frecuencia de items en myGroceries filtrando por los primeros 30 items.
+```{r}
+#TODO: Modifica el valor de topN a 30
+itemFrequencyPlot(myGroceries, topN = 100)
+```
+
+## Algoritmo apriori: Minería de reglas de asociación 
+
+Apriori es un algoritmo que cuenta transacciones por medio de una estrategia orientada a nivel y por amplitud primero (en contraste con profundidad). Fue desarrollado por Agrawal y Srikant (1994). Se utiliza para generar reglas de asociación, identificar itemsets, itemsets de frecuencia máxima e itemsets de frecuencia cerrada.
+
+
+Efectuaremos minería de reglas de asociación por medio del algoritmo Apriori implementado en arules.
+
+Visualiza la salida de la consola de R para examinar la salida del algoritmo.
+```{r}
+rules <- apriori(myGroceries, parameter = list(support = 0.001, confidence = 0.05))
+summary(rules)
+```
+
+`r emo::ji("document")`
+**DOCUMENTO ARV-02**
+
+Documenta los siguientes datos de la salida de arules:
+
+- Número de reglas producidas.
+
+- Distribución del tamaño de las reglas (lhs + rhs).
+
+- Media aritmética de la distribución de reglas.
+
+
+## Estructura de la clase rules
+
+Examinaremos la estructura del objeto rules
+```{r}
+str(rules)
+```
+
+La clase `rules` representa a un conjunto de reglas las cuales generalmente se crean por medio de la invocación de un algoritmo de minería de reglas de asociación como `apriori`. Las reglas almacenan el LHS y el RHS de forma separada como objetos de la clase `itemMatrix`.
+
+Las reglas minadas típicamente contienen diversas mediciones de interés las cuales pueden accederse por medio del método `quality`. Es posible calcular mediciones adicionales por medio de `interestMeasure`
+
+Obtenemos las primeras tres reglas respecto a la métrica lift, que es una métrica popular de la fortaleza de la regla.
+```{r}
+inspect(head(rules, n = 3, by = "lift"))
+```
+
+Para conocer las medidas disponibles en el conjunto de reglas empleamos el método `quality`.
+
+```{r}
+head(quality(rules))
+```
+Estas son las medidas generadas por omisión con el algoritmo Apriori. Para añadir otras mediciones es posible emplear la función `interestMeasures()` de la librería arules.
+
+
+Resulta evidente que explorar las decenas de miles de transacciones de forma manual no es una opción viable. Emplearemos diversas técnicas de visualización del paquete arulesViz las cuales comparten la siguiente interfaz:
+```{r}
+args(getS3method("plot", "rules"))
+```
+`x` representa el conjunto de reglas a ser vizualizadas, `method` es el método de visualización y `measure` y `shading` contienen las mediciones de interés empleadas por la gráfica. 
+Por medio de `engine` es posible usar diversos motores de graficación para visualizar las reglas. El motor predeterminado típicamente usa `grid`, muchas gráficas pueden ser visualizadas con el motor "htmlwidget" en cual resulta en un widget HTML.
+
+## Técnicas y ejemplos de visualización con arulesViz
+
+### Scatter plot
+Es posible lograr una visualización simple de reglas de asociación por medio de la gráfica scatter plot con dos medidas de interés en los ejes. El método por omisión de reglas de asociación en arulesViz es el scatter plot empleando support y confidence en los ejes. También se usa una tercera medición (lift, por omisión) como el color (o escala de grises de los puntos). Se incluye una escala del rango de valores que corresponde a los colores.
+```{r}
+plot(rules)
+```
+Es posible emplear en los ejes del scatter plot cualquier medición de calidad almacenada en el slot de calidad del conjunto de reglas (vector de longitud 2 para el parámetro measure) o para el gradiente de color (shading).
+
+`r emo::ji("document")`
+**DOCUMENTO ARV-03**
+
+Analiza la gráfica, identifica las reglas que tengan un valores altos en la medición lift e indica para ellas si el valor de support es alto o bajo.
+
+
+`r emo::ji("computer")`
+**EJERCICIO ARV-04**
+
+Modifica el código de abajo para crear un scatter plot con las siguientes propiedades:
+
+- support en el eje horizontal (h-axis)
+
+- lift en el eje vertical (v-xaix)
+
+- confidence (measure) como gradiente de color (shading)
+
+```{r}
+#TODO: Asigna los parámetros a plot para:
+# support en el eje horizontal (h-axis)
+# lift en el eje vertical (v-xaix)
+# confidence (measure) como gradiente de color (shading)
+
+#plot(rules, measure = c("h-axis", "v-axis"), shading = "measure")
+plot(rules, measure = c("lift", "support"), shading = "confidence")
+```
+
+`r emo::ji("computer")`
+**EJERCICIO ARV-05**
+
+Modifica el código de abajo para crear una gráfica scatter plot con support y confidence en los ejes horizontal y vertical, empleando coverage como medición asociada a la escala de colores.
+```{r}
+#TODO: Scatter plot con support y confidence en los ejes horizontal y vertical, empleando coverage como medición asociada a la escala de colores
+
+# Por omisión la gráficas scatter plot en arulesViz presentan support en el eje horizontal y confidence en el eje vertical
+
+#plot(rules, shading="measure")
+plot(rules, shading = "lift")
+```
+
+
+### Two-key plot
+Introducida por Unwin, Hoffmann y Bernt (2001), el Two-key pllot es una versión especial de un scatter plot en la que support y confidence están asociados al eje horizontal y vertical y el color de los puntos indica el "orden" (número de elementos contenidos en la regla). Este tipo de gráficas pueden ser creadas por medio de la interfaz unificada.
+
+```{r}
+plot(rules, method= "two-key plot")
+```
+
+`r emo::ji("document")`
+**DOCUMENTO ARV-04**
+
+Responde: ¿Qué tipo de relación muestran order y support en esta visualización?
+
+
+### Scatter plots interactivos en arulesViz
+
+El método plot ofrece características interactivas para seleccionar reglas y mostrar mayor o menor detalle en la gráfica (zoom in y zoom out) las cuales son útiles tareas de exploración. La interacción se activa por medio del parámetro engine = "interactive".
+
+```{r}
+#sel <- plot(rules, measure = c("support", "lift"), shading = "confidence", interactive = TRUE)
+```
+
+Las funciones interactivas incluyen: 
+- Inspeccionar reglas individuales al seleccionarlas y dar click al botón inspect.
+- Inspeccionar conjuntos de reglas al seleccionar una región rectangular de la gráfica y dar click en el botón inspect.
+- Mostrar mayor o menor detalle en una región seleccionada (botones zoom in / zoom out).
+- Regresar a la última selección para mayor análisis, (botón end).
