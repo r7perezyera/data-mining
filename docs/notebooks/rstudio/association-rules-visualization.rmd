@@ -258,7 +258,12 @@ Responde: ¿Qué tipo de relación muestran order y support en esta visualizaci�
 El método plot ofrece características interactivas para seleccionar reglas y mostrar mayor o menor detalle en la gráfica (zoom in y zoom out) las cuales son útiles tareas de exploración. La interacción se activa por medio del parámetro engine = "interactive".
 
 ```{r}
-#sel <- plot(rules, measure = c("support", "lift"), shading = "confidence", interactive = TRUE)
+#Este comando debe ejecutarse desde la consola de R
+# El  error "Error in upgradeUnit.default(x) : Not a unit object" 
+# ocurre durante el proceso de knit ver 
+# https://github.com/rstudio/rmarkdown/issues/1759
+
+#sel <- plot(rules, measure = c("support", "lift"), shading = "confidence", engine = 'interactive')
 ```
 
 Las funciones interactivas incluyen: 
