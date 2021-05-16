@@ -1,11 +1,11 @@
 ---
 title: "Ejercicios de Visualización de Association Rules"
 output:
+  word_document:
+    toc: yes
   pdf_document:
     toc: yes
     latex_engine: xelatex
-  word_document:
-    toc: yes
   html_document:
     df_print: paged
     toc: yes
@@ -76,7 +76,7 @@ Trabajaremos con una muestra del 80% de las transacciones de Groceries. Para log
 
 ```{r}
 #TODO: Asigna a STUDENT_ID los dígitos de tu matrícula (p.e. 430000).
-STUDENT_ID = 0 
+STUDENT_ID = 1374866
 ```
 
 Ejecuta el siguiente bloque de código para obtener una muestra del 80% de las transacciones de Groceries, las cuales estarán referenciadas en la variable `myGroceries`.
@@ -131,7 +131,7 @@ Para este caso, la gráfica tiene demasiada información por lo que su interpret
 Visualiza la frecuencia de items en myGroceries filtrando por los primeros 30 items.
 ```{r}
 #TODO: Modifica el valor de topN a 30
-itemFrequencyPlot(myGroceries, topN = 100)
+itemFrequencyPlot(myGroceries, topN = 30)
 ```
 
 ## Algoritmo apriori: Minería de reglas de asociación 
@@ -223,7 +223,7 @@ Modifica el código de abajo para crear un scatter plot con las siguientes propi
 # confidence (measure) como gradiente de color (shading)
 
 #plot(rules, measure = c("h-axis", "v-axis"), shading = "measure")
-plot(rules, measure = c("lift", "support"), shading = "confidence")
+plot(rules, measure = c("support", "lift"), shading = "confidence")
 ```
 
 `r emo::ji("computer")`
@@ -236,7 +236,7 @@ Modifica el código de abajo para crear una gráfica scatter plot con support y 
 # Por omisión la gráficas scatter plot en arulesViz presentan support en el eje horizontal y confidence en el eje vertical
 
 #plot(rules, shading="measure")
-plot(rules, shading = "lift")
+plot(rules, shading = "coverage")
 ```
 
 
@@ -259,6 +259,10 @@ El método plot ofrece características interactivas para seleccionar reglas y m
 
 ```{r}
 #sel <- plot(rules, measure = c("support", "lift"), shading = "confidence", interactive = TRUE)
+
+# la siguiente línea se ejecutó en la consola de RStudio para mostrar el gráfico interactivo:
+# se deja comentada para indicar que NO debe correrse dentro de la celda
+#sel <- plot(rules, measure = c("support", "lift"), shading = "confidence", engine = "interactive")
 ```
 
 Las funciones interactivas incluyen: 
