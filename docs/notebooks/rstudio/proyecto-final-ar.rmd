@@ -1,5 +1,5 @@
 ---
-title: "Proyecto Final Association Rules"
+title: "Proyecto Final (Association Rules)"
 author: "Profesor Marciano A. Moreno D.C."
 date: "27 de mayo de 2021"
 output:
@@ -343,8 +343,8 @@ Configura la invocación a `apriori` para producir al menos 220 reglas de asocia
 
 ```{r}
 #TODO: Configura las variables SUPP y CONF para generar al menos 250 reglas de asociación
-SUPP = 0.025 
-CONF = 0.2
+SUPP = 0.1 
+CONF = 0.8
 rules <- apriori(mssdtx, parameter = list(support = SUPP, confidence = CONF))
 summary(rules)
 ```
@@ -353,7 +353,10 @@ summary(rules)
 
 
 ```{r}
-plot(rules, main=paste0("Elaborado por: ", NOMBRE_COMPLETO, " (", DIGITOS_MATRICULA, ")" ))
+try(
+  plot(rules, main=paste0("Elaborado por: ", NOMBRE_COMPLETO, " (", DIGITOS_MATRICULA, ")" ))
+)
+
 ```
 Inspecciona las reglas con mayor lift
 ```{r}
