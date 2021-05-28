@@ -265,11 +265,6 @@ Instala el paquete [dplyr](https://dplyr.tidyverse.org/) para llevar preparar lo
 ```
 
 Carga la librería dplyr.
-```{r echo=TRUE}
-#library("dplyr")
-```
-
-Carga el paquete dplyr.
 ```{r}
 library(dplyr)
 ```
