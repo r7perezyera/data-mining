@@ -20,6 +20,8 @@ Las actividades incluyen ejecución, personalización y codificación de estatut
 
 La respuesta a todas y cada una de las actividades (implementación de código, notas y enlace a video) debe quedar registrada en el presente documento en formato R Markdown, exportada como documento PDF y publicada en el repositorio GitHub del alumno.
 
+**Fecha límite de entrega: sábado 5 de junio al cierre del día.**
+
 ### Recursos para la realización del proyecto
 El proyecto podrá realizarse en un ambiente de desarrollo local o remoto, dependiendo de los recursos que disponga el alumno.
 
@@ -384,3 +386,5 @@ Graba y publica un video (puede ser un video publicado de forma privada en YouTu
 - No se recibirán proyectos en formato PDF con texto libre y capturas de pantalla.
 - Publica el código de tu notebook a tu respositorio de GitHub por medio de los comandos `commit` y `push`.
 - Envía el documento PDF por medio de mensaje personal a @marciano en Slack `naylacommunity` junto con el enlace a tu repositorio de GitHub.
+
+**Fecha límite de entrega: Sábado 5 de junio al cierre del día.**
