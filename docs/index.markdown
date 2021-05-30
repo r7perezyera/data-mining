@@ -28,9 +28,31 @@ Las reglas de asociación se crean al buscar patrones de la forma X=>Y en una ba
 # Clases
 [10/may](slides/10-may-rel.pdf) (PDF)
 
+# Videos
+[12/abr/2021](https://youtu.be/XhmQ8S-_Rsk)
+
+[19/abr/2021](https://youtu.be/gCPIxqL7HII)
+
+[26/abr/2021](https://youtu.be/I7NyBPC3Ed8)
+
+[10/may/2021](https://youtu.be/VkKzuulBa1M)
+
+[17/may/2021](https://youtu.be/YTTT8G5r6BY)
+
+[24/may/2021](https://youtu.be/69FMfiyxvAw)
+
 # Asignaciones
-[#1](assignments/assignment-1.pdf)
-[#2](https://docs.google.com/document/d/1lQ5lhsvTvoU0I8rMJh8MgHLMGFJ0VDUIc4MfPF6WRMo/edit?usp=sharing)
-[#3](https://docs.google.com/document/d/1NKc2uSOqKpkNE9gM9BWBlfsPQTWSFMQcpN05KVCpfAw/edit?usp=sharing)
+[#1: Equipos: Diagnóstico inicial de datos, tabla integral de estatus](https://docs.google.com/document/d/15ZG-sxhhfeFH4b-3UGJoTCK_w9KMPzEg5mabFXD6x6c/edit?usp=sharing)
 
+[#2: Individual: Association Rules. Equipos: Análisis de modelo de equipo MSF, principios de desarrollo ágil, clusters y Jira, avance de implementación](https://docs.google.com/document/d/1lQ5lhsvTvoU0I8rMJh8MgHLMGFJ0VDUIc4MfPF6WRMo/edit?usp=sharing)
 
+[#3: Individual: Visualización de Association Rules. Equipos: Primeros entregables de desarrollo](https://docs.google.com/document/d/1NKc2uSOqKpkNE9gM9BWBlfsPQTWSFMQcpN05KVCpfAw/edit?usp=sharing)
+
+[#4: Equipos: Actualización de código, primeros entregables documentales](https://docs.google.com/document/d/1czQafa8LJzJcH2gHKHRu3M6fgNcBDDIFZDnbjfp8Hhs/edit?usp=sharing)
+
+# Proyecto final
+:video_camera:
+[Recursos para el proyecto final](https://youtu.be/EZVi8bT8mWw)
+
+:computer:
+[Notebook del proyecto final](notebooks/rstudio/proyecto-final-ar.html)
