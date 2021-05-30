@@ -25,8 +25,8 @@ Las reglas de asociación se crean al buscar patrones de la forma X=>Y en una ba
 :computer:
 [Ejercicios notebook RStudio](notebooks/rstudio/association-rules-visualization.html)
 
-# Clases
-[10/may](slides/10-may-rel.pdf) (PDF)
+# Slides
+[Láminas de todas las clases](https://drive.google.com/file/d/1YWoyt81GUh86ksTh8owYzfqdVC6CzCRN/view?usp=sharing) (PDF)
 
 # Videos
 [12/abr/2021](https://youtu.be/XhmQ8S-_Rsk)
@@ -56,3 +56,7 @@ Las reglas de asociación se crean al buscar patrones de la forma X=>Y en una ba
 
 :computer:
 [Notebook del proyecto final](notebooks/rstudio/proyecto-final-ar.html)
+
+# Referencias
+
+[Intro to DataFrames and Spark SQL](https://piazza-resources.s3.amazonaws.com/iyy6lqbrlio3ru/j14pb8pqxyp2ng/Spark_Development_Bootcamp_Presentation_2.pdf)
