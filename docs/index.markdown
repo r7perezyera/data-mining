@@ -21,14 +21,15 @@ Las reglas de asociación se crean al buscar patrones de la forma X=>Y en una ba
 
 [Láminas](slides/association-rules-visualization.html)
 
+:computer:
+[Ejercicios notebook RStudio](notebooks/rstudio/association-rules-visualization.html)
+
 # Text Mining
+Proceso por medio del cual se obtiene información de alta calidad a partir de texto.
 
 ## Introducción a Text Mining
 [Láminas](slides/text-mining-intro.yml.html)
 
-
-:computer:
-[Ejercicios notebook RStudio](notebooks/rstudio/association-rules-visualization.html)
 
 # Slides
 [Láminas de todas las clases](https://drive.google.com/file/d/1YWoyt81GUh86ksTh8owYzfqdVC6CzCRN/view?usp=sharing) (PDF)
