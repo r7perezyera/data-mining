@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introducción a Text Mining </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="workshop.css">
+  </head>
+  <body>
+    <!--
+    <div style="position: absolute; left: 20%; right: 20%; top: 30%;">
+      <h1 style="font-size: 3em;">Loading ...</h1>
+      The slides should show up here. If they don't, it might be
+      because you are accessing this file directly from your filesystem.
+      It needs to be served from a web server. You can try this:
+      <pre>
+        docker-compose up -d
+        open http://localhost:8888/workshop.html # on MacOS
+        xdg-open http://localhost:8888/workshop.html # on Linux
+      </pre>
+      Once the slides are loaded, this notice disappears when you
+      go full screen (e.g. by hitting "f").
+    </div>
+    -->
+    <textarea id="source">class: title, self-paced
+
+Introducción a Text Mining<br/>
+
+.nav[*Self-paced version*]
+
+.debug[
+```
+?? slides/text-mining-intro.yml
+
+```
+
+These slides have been built from commit: 173008a
+
+
+[shared-es-mx/title.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/shared-es-mx/title.md)]
+---
+
+class: title, in-person
+
+Introducción a Text Mining<br/><br/></br>
+???
+.footnote[
+**Diapositivas[:](https://www.youtube.com/watch?v=h16zyxiwDLY) **
+]
+
+<!--
+WiFi: **Something**<br/>
+Password: **Something**
+
+**Be kind to the WiFi!**<br/>
+*Use the 5G network.*
+*Don't use your hotspot.*<br/>
+*Don't stream videos or download big files during the workshop*<br/>
+*Thank you!*
+-->
+
+.debug[[shared-es-mx/title.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/shared-es-mx/title.md)]
+---
+
+name: toc-module-0
+
+## Tabla de Contenido
+
+- [Datos no estructurados en contexto](#toc-datos-no-estructurados-en-contexto)
+
+- [Campos de aplicación de análisis de datos no estructurados](#toc-campos-de-aplicacin-de-anlisis-de-datos-no-estructurados)
+
+- [Procesos y técnicas de minería de texto](#toc-procesos-y-tcnicas-de-minera-de-texto)
+
+.debug[(auto-generated TOC)]
+
+
+
+.debug[[shared-es-mx/toc.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/shared-es-mx/toc.md)]
+---
+
+class: pic
+
+.interstitial[![Image separating from the next module](images/tec-ec.png)]
+
+---
+
+name: toc-datos-no-estructurados-en-contexto
+class: title
+
+ Datos no estructurados en contexto
+
+.nav[
+[Sección anterior](#toc-)
+|
+[Tabla de contenido](#toc-module-0)
+|
+[Siguiente sección](#toc-campos-de-aplicacin-de-anlisis-de-datos-no-estructurados)
+]
+
+.debug[(automatically generated title slide)]
+
+---
+# Datos no estructurados en contexto
+.concept[
+El análisis y la minería de texto se ocupan de transformar texto a una representación numérica para aplicar algoritmos analíticos a una colección grande de documentos.
+]
+- Requiere de principios de otras disciplinas: procesamiento de lenguaje natural, estadística, inteligencia artificial, bases de datos, minería de datos y ciencias de la información.
+
+- Emplea tecnologías que compiten entre sí que se encuentra en diversos grados de madurez y accesibilidad (comercial, academia). 
+
+- 80% de la información es no estructurada.
+
+- El acervo de información no estructurada crece de forma exponencial.
+
+.debug[[textanalytics/unstructured-data-in-context.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/unstructured-data-in-context.md)]
+---
+class: pic
+![Text analytics itersections overview](images/text-analytics-intersections-overview.png)
+.debug[[textanalytics/unstructured-data-in-context.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/unstructured-data-in-context.md)]
+---
+.concept[
+    El análisis de datos no estructurados cobra relevancia debido a que la mayor parte de los datos de una organización son de este tipo. Analizaremos los factores que han contribuido a su crecimiento y las oportunidades que existen para realizar valor con ellos.
+]
+
+- SMACIT = Social, Mobile, Cloud, Big Data Analytics, Internet of Things.
+- Crecimiento datos de 100x cada diez años.
+- 80% de los datos existentes son no estructurados.
+
+![SMACIT](images/smacit.png)
+<!-- SMACIT = Social, Mobile, Cloud, Big Data Analytics, Internet of Things -->
+.debug[[textanalytics/unstructured-data-in-context.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/unstructured-data-in-context.md)]
+---
+## Social
+.concept[
+    Las redes sociales están creciendo en número de usuarios y en diversidad de oferta para sectores específicos de la población. Son una fuente significativa de datos no estructurados.
+]
+- Aplicaciones: análisis de sentimiento, análisis de redes, identificación de eventos, identificación de influenciadores.
+- Medios de acceso: Interfaces programáticas APIs para texto, extracción de contenido de otros medios como fotografías, audio y video.
+- Retos para el análisis: Escritura sin apego a reglas ortográficas y gramaticales, ambigüedad léxica, sintáctica y semántica.
+
+![Social icon](images/social.svg)
+.debug[[textanalytics/unstructured-data-in-context.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/unstructured-data-in-context.md)]
+---
+## Móvil
+.concept[
+    Dos tercios de la población global son suscriptores de servicios móviles. Móvil tiene mayor alcance que cualquier otra tecnología. 5 billones de usuarios a nivel mundial. Integración de inteligencia artificial a dispositivos móviles.
+]
+- Aplicaciones: agentes conversacionales, chatbots, traducción automatica.
+- Medios de acceso: Interfaces programáticas APIs para el dispositivo móvil, servicios de cómputo en la nube.
+- Retos para el análisis: Desarrollo de modelos para detección de intrusos, implicaciones de privacidad.
+
+![Mobile icon](images/mobile.svg)
+
+
+???
+Samsung: Machine Learning Text Analysis Unlocks the Power of Natural Language Processing
+Interactuamos con máquinas como si fueran personas
+Chatbots para recuperación de información
+Biometric scanning + ML 9 NLP = mejorar ciberseguridad
+https://insights.samsung.com/2017/09/08/machine-learning-text-analysis-unlocks-the-power-of-natural-language-processing/
+.debug[[textanalytics/unstructured-data-in-context.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/unstructured-data-in-context.md)]
+---
+## Big Data y Analytics
+.concept[
+    El análisis de datos no estructurados forma parte de los servicios otorgados por plataformas tecnológicas en sitio y en la nube de Big Data con capacidades para obtener información del texto, organizar documentos por temas, entrenar modelos con datos propios y dar soporte a textos generales y específicos de industria.
+]
+- Medios de acceso: APIs y servicios con modelos preentrenados, disponibles para uso remoto, así como librerías para clientes Web.
+- Retos para el análisis: Etiquetado de datasets grandes.
+
+![Analytics icon](images/analytics.svg)
+???
+https://aws.amazon.com/comprehend/
+
+.debug[[textanalytics/unstructured-data-in-context.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/unstructured-data-in-context.md)]
+---
+## Nube
+.concept[
+    La adopción de las tecnologías de la nube se ha vuelto de uso cotidiano. El segmento de SaaS es el mayor ($116B USD), seguido de IaaS ($50B USD). 1a generación: VMs, 2a generación: serverless. 
+]
+- Aplicaciones: Habilitación de aplicaciones de analítica de texto por medio de modelos PaaS y SaaS.
+- Medios de acceso: Contenedores, microservicios, interfaces programáticas APIs.
+- Retos para el análisis: Integración con recursos tecnológicos en sitio, habilitar nube híbrida. Federación de datos.
+![Cloud icon](images/cloud.svg)
+
+???
+https://www.gartner.com/en/newsroom/press-releases/2019-11-13-gartner-forecasts-worldwide-public-cloud-revenue-to-grow-17-percent-in-2020
+
+https://www.ibmbigdatahub.com/blog/why-analyzing-text-so-hard
+
+
+.debug[[textanalytics/unstructured-data-in-context.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/unstructured-data-in-context.md)]
+---
+
+## Internet de las Cosas
+.concept[
+    Los datos capturados por dispositivos IoT pueden ser estructurados, no estructurados o semi estructurados. Los datos pueden incluir señales análogas, lecturas de sensores discretos, metadatos del estado operativo del dispositivo y archivos grandes de audio o video.
+]
+- Aplicaciones: Gestión e interpretación de información de dispositivos IoT.
+- Retos para el análisis: Implementación de procesos de analítica automatizados.
+![IoT icon](images/iot.svg)
+???
+https://developer.ibm.com/technologies/iot/tutorials/iot-lp301-iot-manage-data/
+
+.debug[[textanalytics/unstructured-data-in-context.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/unstructured-data-in-context.md)]
+---
+## Actores que generan datos
+- Nuevos actores involucrados en la generación de información
+    - Empleados.
+    - Usuarios.
+    - Máquinas.
+
+
+
+.debug[[textanalytics/unstructured-data-in-context.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/unstructured-data-in-context.md)]
+---
+
+class: pic
+
+.interstitial[![Image separating from the next module](images/tec-ec.png)]
+
+---
+
+name: toc-campos-de-aplicacin-de-anlisis-de-datos-no-estructurados
+class: title
+
+ Campos de aplicación de análisis de datos no estructurados
+
+.nav[
+[Sección anterior](#toc-datos-no-estructurados-en-contexto)
+|
+[Tabla de contenido](#toc-module-0)
+|
+[Siguiente sección](#toc-procesos-y-tcnicas-de-minera-de-texto)
+]
+
+.debug[(automatically generated title slide)]
+
+---
+# Campos de aplicación de análisis de datos no estructurados
+.concept[
+    El análisis de datos no estructurados tiene diversas áreas de aplicación que pueden ser del interés para los involucrados en una solución.
+]
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+class: pic
+![Text analytics practice areas overview](images/text-analytics-practice-areas-overview.png)
+
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+## Campos de aplicación de análisis de texto
+
+|Campo|Descripción|
+|---|---|
+|Búsqueda y recuperación de información|Indexar, buscar y recuperar documentos de bases de datos grandes con consultas de claves|
+|Agrupación de documentos|Aplica algoritmos de minería de datos para agrupar documentos similares (en clusters)|
+|Clasificación de documentos|Asigna un conjunto definido de etiquetas a documentos no etiquetados|
+|Minería web|Analiza los documentos Web y sus enlaces. Apalanca tecnologías de clasificación de documentos y comprensión de lenguaje natural|
+|Extracción de información|Construye datos estructurados a partir de texto no estructurado|
+|Procesamiento de lenguaje natural|Provee de variables de entrada para procesos de minería de texto tales como etiquetas de parte de lenguaje y fronteras de frases|
+|Extracción de conceptos|Sistemas automatizados que "comprenden" el significado del texto|
+
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+class: pic
+![Text analytics practice decision fllow](images/text-analytics-practice-decision-flow.png)
+
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+## Recuperación de información
+.concept[
+    Almacenamiento y recuperación de documentos de texto, incluyendo motores de búsqueda y búsqueda de palabras clave.
+]
+- Producto deseado: Documentos que correspondan con palabras clave.
+- Temas de minería de texto: búsqueda de palabras clave, índice invertido, respuesta a preguntas.
+
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+## Agrupación de documentos (Clustering)
+.concept[
+    Agrupación y términos de grupos aplicado a fragmentos de texto, párrafos o documentos empleando métodos de clustering de data mining.
+]
+
+- Producto deseado: Documentos similares.
+- Algoritmos de minería de datos: K-means, Singular Value Decomposition (SVD).
+- Temas de minería de datos: clustering de documentos, similitud de documentos.
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+## Clasificación de documentos
+.concept[
+    Asignación de etiquetas predefinidas a fragmentos de texto, párrafos o documentos empleando métodos de clasificación de data mining, basado en modelos entrenados o instancias etiquetadas.
+]
+
+- Producto deseado: Documentos únicos.
+- Algoritmos de minería de datos: Naïve Bayes, Singular Value Decomposition (SVD), Regresión Logística, Árboles de Decisión, Redes Neuronales, Máquinas de Soporte Vectorial, MARSplines
+- Temas de minería de datos: selección de características, análisis de sentimiento, reducción de dimensiones, eDiscovery.
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+## Minería Web
+.concept[
+    Minería de datos y textos de contenido en Internet enfocado en la escala e interconectividad del Web.
+]
+
+- Producto deseado: Comprensión de contenido Web.
+- Temas de minería de datos: análisis de sentimiento, "navegación" (crawling) Web, análisis de enlaces.
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+## Extracción de información
+.concept[
+    Identificación y extracción de hechos y relaciones relevantes a partir de texto no estructurado. Incluye el proceso de crear datos estructurados a partir de texto no estructurado o semiestructurado.
+]
+
+- Producto deseado: Una base de datos estructurada.
+- Temas de minería de datos: extracción de entidades, extracción de enlaces.
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+## Extracción de conceptos
+.concept[
+    Creación de grupos de palabras y frases en grupos semánticamente similares.
+]
+
+- Producto deseado: Lista de sinónimos.
+- Temas de modelado de datos: modelado de tópicos, identificación de sinónimos.
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+## Procesamiento de lenguaje natural
+.concept[
+    Procesamiento de bajo nivel y tareas de comprensión (p.e. etiquetado y partes del discurso - POS). El término linguística computacional se considera equivalente.
+]
+
+- Producto deseado: Enunciados con componentes identificados (subrayados).
+- Temas de modelado de datos: etiquetado de partes del discurso (part of speech tagging, POS), tokenización, respuesta a preguntas
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+## Casos de uso de analísis de datos no estructurados
+
+- Identificación de tendencias en documentos
+- Clasificación de documentos
+- Análisis de sentimiento
+- Análisis de asociaciones e identificación de causas raíz
+- Mejora de modelos predictivos con datos de texto
+- Detección de opiniones
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+class: pic
+![Text analytics intersections](images/text-analytics-intersections.png)
+???
+https://www.elderresearch.com/hubfs/Whitepaper_The_Seven_Practice_Areas_of_Text_Analytics_Chapter_2_Excerpt.pdf
+
+
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+## Síntesis de documentos (noticias, artículos)
+.concept[
+    Proceso de condensar un documento o colección en una sinopsis comprensible por medio de recolección de frases clave y comprensión del significado de un texto.
+]
+- Entrenamiento en datasets limpios tokenizados.
+- Aplicable a reportes financieros y agregadores de noticias.
+???
+https://lionbridge.ai/services/text-summarization/
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+## Mercadeo y gestión de medios sociales
+.concept[
+    Herramientas de productividad, inmediatez y mecanismos de respuesta para gestionar e interactuar con el comportamiento que ocurre en el Web social.
+]
+- Relevante para organizaciones con múltiples marcas, canales sociales o portavoces institucionales.
+- Funciones básicas:
+    - Análisis de medios sociales.
+    - Creación de contenido y campañas.
+    - Vinculación con el público y capacidades de respuesta.
+???
+20150505_WP_EN_Sprinklr-IDC_Marketscape_V01.pdf
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+## Análisis legal: Extracción de información de documentos legales
+.concept[
+   Recopilación de datos de múltiples fuentes para proveer de información que contribuya a crear estrategias efectivas legales para juicios relacionados con pantentes, marcas y derechos de autor.
+]
+- Digitalización de documentos, aplicación de procesos OCR.
+- Extracción de información de texto con contenido legal (p.e. caso, juzgado, partes, tipo de juicio, argumentos).
+- Integración de información relacionada (patentes, marcas).
+- Identificación de entidades (NER).
+- Clasificación de documentos.
+???
+20150505_WP_EN_Sprinklr-IDC_Marketscape_V01.pdf
+ La información de ligitios cuenta con abundantes referencias a jueces, abogados, partes (empresas, organizaciones públicas) recoletada de millones de documentos.
+.debug[[textanalytics/use-cases.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/use-cases.md)]
+---
+
+class: pic
+
+.interstitial[![Image separating from the next module](images/tec-ec.png)]
+
+---
+
+name: toc-procesos-y-tcnicas-de-minera-de-texto
+class: title
+
+ Procesos y técnicas de minería de texto
+
+.nav[
+[Sección anterior](#toc-campos-de-aplicacin-de-anlisis-de-datos-no-estructurados)
+|
+[Tabla de contenido](#toc-module-0)
+|
+[Siguiente sección](#toc-)
+]
+
+.debug[(automatically generated title slide)]
+
+---
+# Procesos y técnicas de minería de texto
+
+.concept[La analítica de texto extrae significado, patrones y estructura a partir de datos de texto no estructurado.
+]
+- Luhn, Hans Peter. "The Automatic Creation of Literature Abstracts"
+- Minería de texto: Enfocado en la aplicación de machine learning y métodos estadísticos en un enfoque de tipo BOW (bag of words).
+
+- Analítica de texto: Evolución más amplia que integra técnicas de minería de datos, machine learning, procesamiento de lenguaje natural, recuperación de información y gestión de conocimiento.
+.debug[[textanalytics/text-analysis-process-and-techniques.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/text-analysis-process-and-techniques.md)]
+---
+## Análisis de texto
+- Text Analytics = Entendimiento de lenguaje natural + minería de texto
+- Extensión de minería de datos, descubrimiento de conocimento en texto (KDT)
+- La minería de datos clásica ser orienta al análisis de datos estructurados
+- Campo interdisciplinario con intersecciones en: extracción de información, machine learning, estadística, linguística computacional
+???
+## Clasificación de técnicas de analítica de texto
+- Recuperación de información (Information Retrieval, IR)
+- Análisis exploratorio
+- Extracción de conceptos
+- Generación de síntesis informativa
+- Categorización
+- Análisis de sentimiento
+- Gestión de contenido
+- Gestión de ontologías
+
+.debug[[textanalytics/text-analysis-process-and-techniques.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/text-analysis-process-and-techniques.md)]
+---
+## Análisis exploratorio
+
+- Muestreo de datos
+- Limpieza de datos (dividir líneas en enunciados, espacios en blanco, )
+- Generación de modelos ngram (1:3), tokenizer
+- Visualizar los datos, histogramas de tokens
+- Frecuencia relativa de términos, Relative Term Frecuency (RTF) de los tokens
+- Técnicas avanzadas: morfología, lematización, normalization
+.debug[[textanalytics/text-analysis-process-and-techniques.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/text-analysis-process-and-techniques.md)]
+---
+## Clustering
+.concept[
+    Técnica empleada para agrupar documentos similares. Difiere de clasificación porque la agrupación no usa tópicos predefinidos. Aplica métodos de aprendizaje supervisado.
+]
+- Los documentos pueden aparecer en múltiples subtópicos.
+- Contribuye a que un documento no sea omitido en un proceso de búsqueda (referencia por múltiples índices).
+.debug[[textanalytics/text-analysis-process-and-techniques.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/text-analysis-process-and-techniques.md)]
+---
+class: pic
+![Document clustering process](images/document-clustering-process.png)
+.debug[[textanalytics/text-analysis-process-and-techniques.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/text-analysis-process-and-techniques.md)]
+---
+## Clasificación
+.concept[
+    La clasificación involucra identificar los temas principales de un documento al colocarlo en un conjunto predefinido de temas (p.e. taxonomías). La clasificación solo cuenta las palabras que aparecen y de su cuantificación identifica los temas principales que aparecen en el documento.
+]
+- Se basa en relaciones identificadas al buscar por términos amplios, términos cortos, sinónimos y términos relacionados.
+- Las herramientas de clasificación cuentan con métodos para calificar los documentos de acuerdo a la cantidad de información de un tema en particular.
+.debug[[textanalytics/text-analysis-process-and-techniques.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/text-analysis-process-and-techniques.md)]
+---
+class: pic
+![Text classification process](images/text-classification-process.png)
+
+.debug[[textanalytics/text-analysis-process-and-techniques.md](https://github.com/marcianomoreno/container.training.git/blob/master/slides/textanalytics/text-analysis-process-and-techniques.md)]</textarea>
+    <script src="remark.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        ratio: '16:9',
+        highlightSpans: true,
+        slideNumberFormat: '%current%/%total%',
+        excludedClasses: ["self-paced"]
+      });
+    </script>
+    
+    <!-- 
+    These two scripts will be available only when loading the
+    content using the pub/sub server. Otherwise, they'll just
+    404 and that's OK.
+    -->
+    <script src="/socket.io/socket.io.js">
+    </script>
+    <script src="/remote.js">
+    </script>
+
+  </body>
+</html>
