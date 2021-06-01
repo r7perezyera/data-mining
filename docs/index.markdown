@@ -21,6 +21,11 @@ Las reglas de asociación se crean al buscar patrones de la forma X=>Y en una ba
 
 [Láminas](slides/association-rules-visualization.html)
 
+# Text Mining
+
+## Introducción a Text Mining
+[Láminas](slides/text-mining-intro.yml.html)
+
 
 :computer:
 [Ejercicios notebook RStudio](notebooks/rstudio/association-rules-visualization.html)
@@ -40,6 +45,8 @@ Las reglas de asociación se crean al buscar patrones de la forma X=>Y en una ba
 [17/may/2021](https://youtu.be/YTTT8G5r6BY)
 
 [24/may/2021](https://youtu.be/69FMfiyxvAw)
+
+[31/may/2021](https://youtu.be/W6GSHVC5O08)
 
 # Asignaciones
 [#1: Equipos: Diagnóstico inicial de datos, tabla integral de estatus](https://docs.google.com/document/d/15ZG-sxhhfeFH4b-3UGJoTCK_w9KMPzEg5mabFXD6x6c/edit?usp=sharing)
