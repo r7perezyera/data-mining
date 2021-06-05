@@ -1,0 +1,385 @@
+---
+title: "Proyecto Final (Association Rules)"
+author: "Profesor Marciano A. Moreno D.C."
+date: "27 de mayo de 2021"
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    latex_engine: xelatex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+## Introducción
+Este notebook contiene las actividades a realizar como parte del proyecto final de la materia Data Mining del Tecnológico de Monterrey, Campus Estado de México para el ciclo escolar enero/junio de 2021.
+
+Las actividades incluyen ejecución, personalización y codificación de estatutos del lenguaje R con diversas liberarías de reglas de asociación, así como cálculos, análisis, investigación y exposición de conceptos relacionados.
+
+La respuesta a todas y cada una de las actividades (implementación de código, notas y enlace a video) debe quedar registrada en el presente documento en formato R Markdown, exportada como documento PDF y publicada en el repositorio GitHub del alumno.
+
+**Fecha límite de entrega: sábado 5 de junio al cierre del día.**
+
+### Recursos para la realización del proyecto
+El proyecto podrá realizarse en un ambiente de desarrollo local o remoto, dependiendo de los recursos que disponga el alumno.
+
+Recursos generales:
+
+- Cuenta de usuario en GitHub.
+- GitHub Desktop.
+- Fork del [repositorio principal de la clase](https://github.com/marcianomoreno/data-mining.git)
+- Conectividad a Internet.
+- Dispositivo de grabación de video.
+- Cuenta para publicación de video (puede ser privado) como es el caso de YouTube.
+
+Ambiente de desarrollo local:
+
+- Procesaror Intel i5, 8 GB RAM, 50 GB HD.
+- R Studio Desktop Open Source Edition.
+- Sistema operativo [soportado por R Studio](https://www.rstudio.com/about/platform-support/).
+- Proyecto de R Studio con el repositorio GitHub del alumno.
+
+Ambiente de desarrollo remoto:
+
+- Cuenta gratuita en [R Studio Cloud](https://rstudio.cloud/).
+- Espacio de trabajo creado a partir del repositorio GitHub del alumno.
+
+Paquetes de R
+
+- [`git2r`](https://cran.r-project.org/web/packages/git2r/index.html)
+- [`arulesViz`](https://cran.r-project.org/web/packages/arulesViz/index.html) (incluye [`arules`](https://cran.r-project.org/web/packages/arules/index.html))
+- [`dplyr`](https://cran.r-project.org/web/packages/dplyr/index.html)
+
+
+### Conceptos
+
+**Chunk de código**: región del documento identificada por triple tilde invertida.
+```{r}
+#Chunk de código
+```
+
+**Chunk de código sin personalización**: El alumno deberá ejecutar el chunk de código sin mayor personalización.
+```{r}
+#Chunk de código sin personalización.
+print("Este es un chunk de código sin personalización.")
+```
+
+Las actividades de codificación estarán identificadas con la clave **CODE-nn** previo al chunk y contarán con comentarios `#TODO: `.
+
+**CODE-01** Suma 2+3
+Implementa la operación de adición de los enteros 2 y 3
+```{r}
+#TODO: Implementa la operación de adición con los enteros: 2 y 3
+
+```
+
+**Notas en markdown**: El alumno escribirá las notas requeridas en las secciones anotadas con la clave **NOTE-nn**
+
+
+Escribe la fecha actual (**NOTE-01**): <FECHA>
+
+## Personalización del notebook
+
+**CODE-02** Datos generales
+Asigna tus datos a las siguientes variables:
+```{r}
+NOMBRE_COMPLETO = "Nombre Apellidos"
+DIGITOS_MATRICULA = 0
+```
+
+## Instalación y carga de paquetes base
+
+Instala los paquetes base de este notebook.
+
+Los siguientes paquetes son requeridos para aspectos operativos de los ejercicios, no están relacionados con los temas de la materia. Si los paquetes no están instalados deberás retirar los comentarios de los siguientes estatutos y ejecutar el chunk. Coloca los comentarios nuevamente cuando hayas instalado los paquetes.
+
+**CODE-03** Instala `git2r`
+```{r}
+#TODO: Retira los comentarios la primera vez para instalar los paquetes.
+#install.packages("git2r")
+```
+
+git2r es una interfaz para el sistema de control de versiones Git que usaremos para verificar que el número de commit del proyecto final sea el esperado. El valor esperado del commit será comunicado por separado.
+```{r}
+library(git2r)
+git2r::revparse_single(repository("."),"HEAD")
+```
+
+
+## Instalación y carga de paquetes para los ejercicios
+
+Instala los paquetes requeridos para este notebook.
+
+En caso que los no tengas será necesario que retires los comentarios y ejecutes los comandos de la siguiente celda.
+
+<!-- El símbolo de comentarios en R es `#` -->
+
+Tip: Coloca nuevamente en comentario las líneas de abajo en cuanto hayas instalado los paquetes.
+
+**CODE-04** Instala `arulesViz`
+```{r}
+#TODO: Retira los comentarios la primera vez para instalar los paquetes.
+#install.packages("arulesViz")
+```
+
+
+Carga la librería arulesViz (la cual carga automáticamente arules).
+```{r echo=TRUE}
+library("arulesViz")
+```
+
+
+
+## smallbasket: Fundamentos de Association Rules
+Considera a `smallbasket` como la siguiente lista de transacciones, implementa el código necesario y responde a las solicitudes indicadas.
+
+| TID | items |
+| :-: | :-: |
+| Tr10 | {beer, nuts, diapers} |
+| Tr20 | {beer, coffee, diapers} |
+| Tr30 | {beer, diapers, eggs} |
+| Tr40 | {nuts, eggs, milk} |
+| Tr50 | {nuts, coffee, diapers, eggs, milk}|
+
+
+Responde a las siguientes preguntas de smallbasket:
+
+- Cantidad de transacciones (n) (**NOTE-02**): 
+- Frecuencia absoluta del item {beer} (**NOTE-03**): 
+- Frecuencia absoluta del item {nuts} (**NOTE-04**): 
+- Frecuencia absoluta del itemset {beer, nuts} (**NOTE-05**): 
+- Support del item {beer} (**NOTE-06**): 
+- Support del itemset {beer, nuts} (**NOTE-07**): 
+
+
+Implementaremos a `smallbasket` en R por medio de `list`.
+
+```{r}
+smallbasket <- list(c("beer", "nuts", "diapers"), 
+               c("beer", "coffee", "diapers"), 
+               c("beer", "diapers", "eggs"),
+               c("nuts", "eggs", "milk"),
+               c("nuts", "coffee", "diapers", "eggs", "milk"))
+
+names(smallbasket) <- paste("Tr", seq(from = 10, to = 50, by = 10), sep = "")
+```
+Crea un objeto `smalltx` de tipo `arules::transactions` a partir de la lista `smallbasket` el cual deberá tener la siguiente estructura lógica:
+
+| TID | beer | nuts | diapers | coffee | eggs | milk |
+| --- | :-: | :-: | :-: | :-: | :-: | :-: |
+| Tr10 | 1 | 1 | 1 | 0 | 0 | 0 |
+| Tr20 | 1 | 0 | 1 | 1 | 0 | 0 |
+| Tr30 | 1 | 0 | 1 | 0 | 1 | 0 |
+| Tr40 | 0 | 1 | 0 | 0 | 1 | 1 |
+| Tr50 | 0 | 1 | 1 | 1 | 1 | 1 |
+
+**CODE-05** Crea una variable `smalltx` que sea un objeto `transactions` a partir de los datos en `smallbasket`.
+```{r}
+#TODO: Modifica el código de abajo para transformar smallbaskets a un objeto de tipo transactions
+smalltx <- as(smallbasket, "list")
+```
+
+Verifica que smalltx sea de tipo transactions.
+```{r}
+class(smalltx)[1]=="transactions"
+```
+Implementa en el chunk de abajo el código para visualizar la información general del objeto `smalltx` por medio de la función `summary()`, visualiza la salida **R Console** y responde en línea en el markdown a las preguntas de abajo.
+```{r}
+summary(smalltx)
+```
+
+- Número de renglones (**NOTE-08**): 
+- Número de columnas (**NOTE-09**): 
+- Densidad de la matriz (**NOTE-10**): 
+- Media aritmética del número de elementos (itemsets) por transacción (**NOTE-11**):
+
+Visualiza la matriz de items y transacciones.
+```{r}
+try(
+  plot(smalltx, main = paste0("Elaborado por: ", NOMBRE_COMPLETO, " (", DIGITOS_MATRICULA, ")" ))  
+)
+
+```
+
+Visualiza el gráfico de frecuencia de items.
+```{r}
+try(
+  itemFrequencyPlot(smalltx, topN=10, main = paste0("Elaborado por: ", NOMBRE_COMPLETO, " (", DIGITOS_MATRICULA, ")" ))
+)
+
+```
+
+
+Invoca el algoritmo **apriori** de `arules` con las transacciones de `smalltx` y asignando el resultado a `smallrules`.
+```{r}
+smallrules <- apriori(smalltx)
+#parameter = list(support = 0.01, confidence = 0.01)
+```
+
+Menciona los valores por omisión de algoritmo apriori de la librería arules:
+
+- support (mínimo) (**NOTE-12**): 
+- confidence (mínimo) (**NOTE-13**):
+- items (máximo) (**NOTE-14**):
+- tiempo de verificación de subsets (máximo) (**NOTE-15**):
+
+
+Invoca `summary()` con `smallrules`, consulta los resultados en **R Console** y responde a las preguntas de abajo. 
+
+Tip: Para mayor legibilidad emplea el comando **Show in new window**
+
+```{r}
+summary(smallrules)
+```
+
+- Cantidad de reglas producidas (**NOTE-16**):
+- Media aritmética de support (**NOTE-17**):
+- Media aritmética de confidence (**NOTE-18**): 
+
+Inspecciona `smallrules` y responde a las preguntas a continuación.
+```{r}
+inspect(smallrules)
+```
+
+
+- ¿Cuál es la interpretación de la regla `{} => {diapers}` en la que se aprecia la ausencia del LHS? (**NOTE-19**):
+- Calcula el valor de la métrica support para la regla `{beer} => {nuts}` (**NOTE-20**): 
+- Calcula el valor de la métrica confidence para la regla `{beer} => {nuts}` (**NOTE-21**): 
+- ¿Por qué no aparece listada la regla `{beer} => {nuts}`? (**NOTE-22**): 
+
+
+
+## MSSD: El dataset de sesiones de streaming
+[The Music Streaming Sessions Dataset](https://research.atspotify.com/publications/the-music-streaming-sessions-dataset-short-paper/) fue desarrollado por Spotify para promover la investigación en modelado de escucha por parte de usuarios, interacciones en streaming, recuperación de información musical (MIR, por sus siglas en inglés) y recomendaciones con base a sesiones secuenciales.
+
+Analiza una extracción del dataset MSSD por medio de reglas de asociación.
+
+Instala el paquete [dplyr](https://dplyr.tidyverse.org/) para llevar preparar los datos de MSSD de tal forma que puedan ser analizados por medio de  `arules`.
+
+**CODE-06** Instala el paquete dplyr
+```{r}
+#TODO: Retira los comentarios la primera vez para instalar los paquetes.
+#install.packages("dplyr")
+```
+
+Carga la librería dplyr.
+```{r}
+library(dplyr)
+```
+
+Lee el dataset MSSD y verifica su estructura.
+```{r}
+mssddf <- read.csv(url("https://storage.googleapis.com/data-mining-202104/mssd-log_mini.csv")) #../../../data/mssd-log_mini.csv
+str(mssddf)
+```
+
+Inspecciona la columna `session_id`.
+```{r}
+summary(mssddf$session_id)
+head(mssddf$session_id)
+length(unique(mssddf$session_id))
+```
+
+Inspecciona la columna `track_id_clean`.
+```{r}
+summary(mssddf$track_id_clean)
+head(mssddf$track_id_clean)
+length(unique(mssddf$track_id_clean))
+```
+
+Consulta el paper [The Music Streaming Sessions Dataset](https://arxiv.org/abs/1901.09851) y responde a las siguientes preguntas:
+
+- ¿Cuál es el propósito de `session id`? (**NOTE-23**): 
+- ¿Cuál es el propósito de `track id`? (**NOTE-24**):
+- ¿Consideras que las otras columnas del dataset son aplicables para análisis por medio de reglas de asociación, justifica tu respuesta? (**NOTE-25**): 
+
+Inspecciona la estructura de `y`, el dataset preparado.
+```{r}
+x <- mssddf %>% select(session_id, track_id_clean) %>% group_by(session_id)
+y <- as.data.frame(x)
+str(y)
+```
+
+Descarga la librería `dplyr`
+```{r}
+#Descargamos dplyr porque enmascara otras funciones y no es requerida en lo sucesivo 
+detach(package:dplyr)
+```
+
+Genera la representación de transacciones para `arules` del dataset MSSD y visualiza la salida **R Console**.
+```{r}
+mssdtx <- as(split(y[,"track_id_clean"], y["session_id"]), "transactions")
+
+#Trabajaremos con una muestra del 80% de las transacciones
+numSessions <- round(nrow(mssdtx) * 0.8)
+set.seed(DIGITOS_MATRICULA)
+mssdtx <- sample(mssdtx, numSessions)
+summary(mssdtx)
+```
+Responde a las siguientes preguntas:
+
+- ¿Cuál es el ID y frecuencia absoluta de la sesión más frecuente? (**NOTE-26**): 
+- ¿Cuántos items tiene el itemset con mayor número de ocurrencias en la lista element length distribution? (**NOTE-27**): 
+- En el contexto de este dataset con información de sesiones de streaming, ¿cuál es la interpretación de la media aritmética? (**NOTE-28**): 
+
+
+Ejecuta el algoritmo apriori con los parámetros por omisión.
+```{r}
+rules <- apriori(mssdtx)
+summary(rules)
+```
+
+- ¿Qué factores están asociados con que el algoritmo `apriori` con parámetros por omisión no haya producido ninguna regla de asociación, justifica tu respuesta? (**NOTE-29**):
+- ¿Qué riesgos identificas con la asignación de valores muy bajos en los parámetros de  `support` y `confidence` al invocar el algoritmo `apriori`?
+
+**CODE-07** Invoca `apriori`
+Configura la invocación a `apriori` para producir al menos 220 reglas de asociación para ello puedes considerar el uso de los parámetros `support` y `confidence` como se muestra a continuación
+`rules <- apriori(mssdtx, parameter = list(support = SUPP, confidence = CONF))`
+
+```{r}
+#TODO: Configura las variables SUPP y CONF para generar al menos 250 reglas de asociación
+SUPP = 0.1 
+CONF = 0.8
+rules <- apriori(mssdtx, parameter = list(support = SUPP, confidence = CONF))
+summary(rules)
+```
+
+
+
+
+```{r}
+try(
+  plot(rules, main=paste0("Elaborado por: ", NOMBRE_COMPLETO, " (", DIGITOS_MATRICULA, ")" ))
+)
+
+```
+Inspecciona las reglas con mayor lift
+```{r}
+inspect(head(sort(rules, by = "lift")))
+```
+
+
+Graba y publica un video (puede ser un video publicado de forma privada en YouTube u otro servicio similar) de 3 a 5 minutos explicando lo siguiente:
+
+- Nombre y carrera.
+- Concepto de association rules.
+- Diferencia entre los conceptos de transacciones y reglas.
+- Estrategia seguida para descubrir las reglas de interés en el dataset MSSD de este proyecto.
+- Interpretación de la primera regla listada en el chunk anterior con el código `inspect(head(sort(rules, by = "lift")))` aclarando qué significan los datos listados en lhs, rhs y la interpretación de todas sus métricas.
+- Provee el enlace al video aquí: **NOTE-30**
+
+## Entrega del proyecto final
+
+- Verifica que el notebook corra de principio a fin sin errores y produzca los resultados esperados.
+- Verifica que hayas realizado todas las actividades de programación indicadas con **CODE-nn**
+- Verifica que hayas respondido a todas las preguntas **NOTE-nn** 
+- Verifica que hayas producido, publicado y escrito el enlace al video en el notebook.
+- Guarda el archivo de markup (rmd) de forma local.
+- Genera el PDF del notebook por medio del comando Knit (ya sea directo a PDF o Word y posteriormente Save As/PDF).
+- No se recibirán proyectos en formato PDF con texto libre y capturas de pantalla.
+- Publica el código de tu notebook a tu respositorio de GitHub por medio de los comandos `commit` y `push`.
+- Envía el documento PDF por medio de mensaje personal a @marciano en Slack `naylacommunity` junto con el enlace a tu repositorio de GitHub.
+
+**Fecha límite de entrega: Sábado 5 de junio al cierre del día.**
