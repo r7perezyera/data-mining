@@ -1,12 +1,13 @@
 ---
 title: "Proyecto Final (Association Rules)"
-author: "Profesor Marciano A. Moreno D.C."
-date: "27 de mayo de 2021"
+author: "Roberto Téllez Perezyera | Datamining | Profesor Marciano A. Moreno D.C."
+date: "5 de junio de 2021"
 output:
-  html_document:
-    df_print: paged
+  word_document: default
   pdf_document:
     latex_engine: xelatex
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
