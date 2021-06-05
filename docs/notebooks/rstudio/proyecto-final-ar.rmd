@@ -72,21 +72,21 @@ Las actividades de codificación estarán identificadas con la clave **CODE-nn**
 Implementa la operación de adición de los enteros 2 y 3
 ```{r}
 #TODO: Implementa la operación de adición con los enteros: 2 y 3
-
+2 + 3
 ```
 
 **Notas en markdown**: El alumno escribirá las notas requeridas en las secciones anotadas con la clave **NOTE-nn**
 
 
-Escribe la fecha actual (**NOTE-01**): <FECHA>
+Escribe la fecha actual (**NOTE-01**): Fri Jun 04
 
 ## Personalización del notebook
 
 **CODE-02** Datos generales
 Asigna tus datos a las siguientes variables:
 ```{r}
-NOMBRE_COMPLETO = "Nombre Apellidos"
-DIGITOS_MATRICULA = 0
+NOMBRE_COMPLETO = "Roberto Tellez Perezyera"
+DIGITOS_MATRICULA = 01374866
 ```
 
 ## Instalación y carga de paquetes base
@@ -99,6 +99,7 @@ Los siguientes paquetes son requeridos para aspectos operativos de los ejercicio
 ```{r}
 #TODO: Retira los comentarios la primera vez para instalar los paquetes.
 #install.packages("git2r")
+# uncommented and installed
 ```
 
 git2r es una interfaz para el sistema de control de versiones Git que usaremos para verificar que el número de commit del proyecto final sea el esperado. El valor esperado del commit será comunicado por separado.
@@ -122,6 +123,7 @@ Tip: Coloca nuevamente en comentario las líneas de abajo en cuanto hayas instal
 ```{r}
 #TODO: Retira los comentarios la primera vez para instalar los paquetes.
 #install.packages("arulesViz")
+# uncommented and installed
 ```
 
 
@@ -146,12 +148,12 @@ Considera a `smallbasket` como la siguiente lista de transacciones, implementa e
 
 Responde a las siguientes preguntas de smallbasket:
 
-- Cantidad de transacciones (n) (**NOTE-02**): 
-- Frecuencia absoluta del item {beer} (**NOTE-03**): 
-- Frecuencia absoluta del item {nuts} (**NOTE-04**): 
-- Frecuencia absoluta del itemset {beer, nuts} (**NOTE-05**): 
-- Support del item {beer} (**NOTE-06**): 
-- Support del itemset {beer, nuts} (**NOTE-07**): 
+- Cantidad de transacciones (n) (**NOTE-02**): 5
+- Frecuencia absoluta del item {beer} (**NOTE-03**): 3
+- Frecuencia absoluta del item {nuts} (**NOTE-04**): 3
+- Frecuencia absoluta del itemset {beer, nuts} (**NOTE-05**): 1
+- Support del item {beer} (**NOTE-06**): 0.6, i.e., aparece en 3 de 5 transacciones
+- Support del itemset {beer, nuts} (**NOTE-07**): 0.2, i.e., aparece en 1 de 5 transacciones
 
 
 Implementaremos a `smallbasket` en R por medio de `list`.
@@ -178,11 +180,12 @@ Crea un objeto `smalltx` de tipo `arules::transactions` a partir de la lista `sm
 **CODE-05** Crea una variable `smalltx` que sea un objeto `transactions` a partir de los datos en `smallbasket`.
 ```{r}
 #TODO: Modifica el código de abajo para transformar smallbaskets a un objeto de tipo transactions
-smalltx <- as(smallbasket, "list")
+smalltx <- as(smallbasket, "transactions")
 ```
 
 Verifica que smalltx sea de tipo transactions.
 ```{r}
+#class(smalltx)[1]
 class(smalltx)[1]=="transactions"
 ```
 Implementa en el chunk de abajo el código para visualizar la información general del objeto `smalltx` por medio de la función `summary()`, visualiza la salida **R Console** y responde en línea en el markdown a las preguntas de abajo.
@@ -190,10 +193,10 @@ Implementa en el chunk de abajo el código para visualizar la información gener
 summary(smalltx)
 ```
 
-- Número de renglones (**NOTE-08**): 
-- Número de columnas (**NOTE-09**): 
-- Densidad de la matriz (**NOTE-10**): 
-- Media aritmética del número de elementos (itemsets) por transacción (**NOTE-11**):
+- Número de renglones (**NOTE-08**): 5 rows
+- Número de columnas (**NOTE-09**): 6 cols
+- Densidad de la matriz (**NOTE-10**): 0.5666667
+- Media aritmética del número de elementos (itemsets) por transacción (**NOTE-11**): 3.4
 
 Visualiza la matriz de items y transacciones.
 ```{r}
@@ -220,10 +223,10 @@ smallrules <- apriori(smalltx)
 
 Menciona los valores por omisión de algoritmo apriori de la librería arules:
 
-- support (mínimo) (**NOTE-12**): 
-- confidence (mínimo) (**NOTE-13**):
-- items (máximo) (**NOTE-14**):
-- tiempo de verificación de subsets (máximo) (**NOTE-15**):
+- support (mínimo) (**NOTE-12**): 0.1
+- confidence (mínimo) (**NOTE-13**): 0.8
+- items (máximo) (**NOTE-14**): 10
+- tiempo de verificación de subsets (máximo) (**NOTE-15**): 5 sec
 
 
 Invoca `summary()` con `smallrules`, consulta los resultados en **R Console** y responde a las preguntas de abajo. 
@@ -234,9 +237,9 @@ Tip: Para mayor legibilidad emplea el comando **Show in new window**
 summary(smallrules)
 ```
 
-- Cantidad de reglas producidas (**NOTE-16**):
-- Media aritmética de support (**NOTE-17**):
-- Media aritmética de confidence (**NOTE-18**): 
+- Cantidad de reglas producidas (**NOTE-16**): 46 reglas
+- Media aritmética de support (**NOTE-17**): 0.2478
+- Media aritmética de confidence (**NOTE-18**): 0.9957
 
 Inspecciona `smallrules` y responde a las preguntas a continuación.
 ```{r}
@@ -244,10 +247,11 @@ inspect(smallrules)
 ```
 
 
-- ¿Cuál es la interpretación de la regla `{} => {diapers}` en la que se aprecia la ausencia del LHS? (**NOTE-19**):
-- Calcula el valor de la métrica support para la regla `{beer} => {nuts}` (**NOTE-20**): 
-- Calcula el valor de la métrica confidence para la regla `{beer} => {nuts}` (**NOTE-21**): 
-- ¿Por qué no aparece listada la regla `{beer} => {nuts}`? (**NOTE-22**): 
+- ¿Cuál es la interpretación de la regla `{} => {diapers}` en la que se aprecia la ausencia del LHS? (**NOTE-19**): por cómo se puede leer la regla en 'español llano', diríamos que a partir de no comprar items, se comprarán pañales. No obstante, dado el lift de exactamente 1, estamos seguros de que estos LHS y RHS son independientes, i.e., NO constituyen una regla.
+- Calcula el valor de la métrica support para la regla `{beer} => {nuts}` (**NOTE-20**): 0.2
+- Calcula el valor de la métrica confidence para la regla `{beer} => {nuts}` (**NOTE-21**): 0.333
+- ¿Por qué no aparece listada la regla `{beer} => {nuts}`? (**NOTE-22**): Notemos que se corrió el algoritmo apriori con todos sus parámetros por defecto, i.e., no alteramos ninguno. Quedó documentado en NOTE-12 y NOTE-13 que los valores de soporte y confidence mínimos que deben tener las reglas a generar son de 0.1 (para supp) y 0.8 (para conf).
+Si bien el valor de support de `{beer} => {nuts}` es aceptable, su valor de confidence está por debajo del threshold de mínimo 0.8 definido por defecto, por lo cual no se considera en el listado de reglas.
 
 
 
@@ -262,6 +266,7 @@ Instala el paquete [dplyr](https://dplyr.tidyverse.org/) para llevar preparar lo
 ```{r}
 #TODO: Retira los comentarios la primera vez para instalar los paquetes.
 #install.packages("dplyr")
+# uncommented and installed
 ```
 
 Carga la librería dplyr.
@@ -271,7 +276,11 @@ library(dplyr)
 
 Lee el dataset MSSD y verifica su estructura.
 ```{r}
-mssddf <- read.csv(url("https://storage.googleapis.com/data-mining-202104/mssd-log_mini.csv")) #../../../data/mssd-log_mini.csv
+#mssddf <- read.csv(url("https://storage.googleapis.com/data-mining-202104/mssd-log_mini.csv"))
+#../../../data/mssd-log_mini.csv
+
+# save to same directory and read from there
+mssddf <- read.csv('./mssd-log_mini.csv')
 str(mssddf)
 ```
 
@@ -291,12 +300,14 @@ length(unique(mssddf$track_id_clean))
 
 Consulta el paper [The Music Streaming Sessions Dataset](https://arxiv.org/abs/1901.09851) y responde a las siguientes preguntas:
 
-- ¿Cuál es el propósito de `session id`? (**NOTE-23**): 
-- ¿Cuál es el propósito de `track id`? (**NOTE-24**):
-- ¿Consideras que las otras columnas del dataset son aplicables para análisis por medio de reglas de asociación, justifica tu respuesta? (**NOTE-25**): 
+- ¿Cuál es el propósito de `session id`? (**NOTE-23**): Al ser el "identificador único de sesión", funciona como la llave primaria (un identificador único por definición) para cada registro en el dataset.
+- ¿Cuál es el propósito de `track id`? (**NOTE-24**): Es el identificador único de cada pista. Podemos asumir que se espera ver registros repetidos, i.e., tiene sentido que uno o más usuarios en la misma o varias sesiones escuchen la misma canción (track de audio). En especial si es popular.
+- ¿Consideras que las otras columnas del dataset son aplicables para análisis por medio de reglas de asociación, justifica tu respuesta? (**NOTE-25**): Quizá no para análisis hechos estrictamente con reglas de asociación. E.g., se reporta que en el dataset también se ofrecen características del audio y metadatos, pero estos no tienen gran utilidad en el contexto de una metodología que explora cómo la presencia de ciertos items en un set (LHS) conlleva -y qué tan probablemente o con qué tanta confianza lo hace- a que otros items específicos (contenidos en el RHS de una regla) se adicionen al set.
+Por otra parte, se podría hacer más específico el scope del análisis considerando generar reglas solo para usuarios que son premium, la fecha (pensando no solo en días puntuales sino en temporadas) y la hora del día. Todos estos campos son provistos en columnas del dataset.
 
 Inspecciona la estructura de `y`, el dataset preparado.
 ```{r}
+# consider tracks grouped by session_id, i.e., you get the track id's per individual listening session
 x <- mssddf %>% select(session_id, track_id_clean) %>% group_by(session_id)
 y <- as.data.frame(x)
 str(y)
@@ -320,9 +331,9 @@ summary(mssdtx)
 ```
 Responde a las siguientes preguntas:
 
-- ¿Cuál es el ID y frecuencia absoluta de la sesión más frecuente? (**NOTE-26**): 
-- ¿Cuántos items tiene el itemset con mayor número de ocurrencias en la lista element length distribution? (**NOTE-27**): 
-- En el contexto de este dataset con información de sesiones de streaming, ¿cuál es la interpretación de la media aritmética? (**NOTE-28**): 
+- ¿Cuál es el ID y frecuencia absoluta de la sesión más frecuente? (**NOTE-26**): `t_bacf06d3-9185-4183-84ea-ff0db51475ce`, con 883 ocurrencias
+- ¿Cuántos items tiene el itemset con mayor número de ocurrencias en la lista element length distribution? (**NOTE-27**): 20, con 1599 ocurrencias/transacciones
+- En el contexto de este dataset con información de sesiones de streaming, ¿cuál es la interpretación de la media aritmética? (**NOTE-28**): el número promedio de canciones (o tracks) contenidos en una sesión de escucha, esto considerando que estamos trabajando en el dataset `y`, donde agrupamos por ID de sesión las pistas (sus identificadores).
 
 
 Ejecuta el algoritmo apriori con los parámetros por omisión.
@@ -331,8 +342,10 @@ rules <- apriori(mssdtx)
 summary(rules)
 ```
 
-- ¿Qué factores están asociados con que el algoritmo `apriori` con parámetros por omisión no haya producido ninguna regla de asociación, justifica tu respuesta? (**NOTE-29**):
-- ¿Qué riesgos identificas con la asignación de valores muy bajos en los parámetros de  `support` y `confidence` al invocar el algoritmo `apriori`?
+- ¿Qué factores están asociados con que el algoritmo `apriori` con parámetros por omisión no haya producido ninguna regla de asociación, justifica tu respuesta? (**NOTE-29**): Pensemos en support y confidence, que son dos campos clave en la implementación del algoritmo apriori, pues definen qué reglas (de todo el conjunto posible) son consideradas o no según qué tan confiables o qué tanto support tienen.
+- Se adjunta el identificador **NOTE-30** a continuación dado que no estaba presente.
+- El últmo identificador más abajo (link a video) cambia de **NOTE-30** a **NOTE-31**
+- ¿Qué riesgos identificas con la asignación de valores muy bajos en los parámetros de  `support` y `confidence` al invocar el algoritmo `apriori`? (**NOTE-30**) Uno de los propósitos de apriori es generar reglas con un grado pertinente de solidez para tener pronósticos certeros en torno a transacciones y los items contenidos en ellas. Disminuir drásticamente `support` y `confidence` implicará generar reglas que no se cumplen con una frecuencia tan alta como otras, y  también traerá como consecuencia el costo incrementado en tiempo y poder de cómputo que demanda generar más reglas (que no necesariamente serán de más pertinencia o utilidad).
 
 **CODE-07** Invoca `apriori`
 Configura la invocación a `apriori` para producir al menos 220 reglas de asociación para ello puedes considerar el uso de los parámetros `support` y `confidence` como se muestra a continuación
@@ -340,7 +353,19 @@ Configura la invocación a `apriori` para producir al menos 220 reglas de asocia
 
 ```{r}
 #TODO: Configura las variables SUPP y CONF para generar al menos 250 reglas de asociación
-SUPP = 0.1 
+
+#SUPP = 0.1; CONF = 0.8   # initial combination generates 0 rules
+
+# SUPP of 0.025 generates 156
+# SUPP of 0.0125 generates 61309
+# SUPP of 0.01875 with conf of 0.025 generates 2770 rules still in reasonable time
+# lowering SUPP to 0.02 brings 1508 rules
+# SUPP of 0.0225 brings up 467 rules
+# CONF in 0.025, bring it up to 0.3, generates 455 rules
+# CONF brought back up to original value
+
+# this combination generates 262 rules
+SUPP = 0.0225
 CONF = 0.8
 rules <- apriori(mssdtx, parameter = list(support = SUPP, confidence = CONF))
 summary(rules)
@@ -368,7 +393,7 @@ Graba y publica un video (puede ser un video publicado de forma privada en YouTu
 - Diferencia entre los conceptos de transacciones y reglas.
 - Estrategia seguida para descubrir las reglas de interés en el dataset MSSD de este proyecto.
 - Interpretación de la primera regla listada en el chunk anterior con el código `inspect(head(sort(rules, by = "lift")))` aclarando qué significan los datos listados en lhs, rhs y la interpretación de todas sus métricas.
-- Provee el enlace al video aquí: **NOTE-30**
+- Provee el enlace al video aquí: **NOTE-31** https://youtu.be/zj2Fgrc2eDc
 
 ## Entrega del proyecto final
 
